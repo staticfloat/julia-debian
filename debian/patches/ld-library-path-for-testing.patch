@@ -1,0 +1,21 @@
+Description: Use correct dynamic loading path when running tests
+ When Julia is compiled with MULTIARCH_INSTALL=1, the libraries are still under
+ usr/lib in the build directory. Hence they cannot be found when Julia is run
+ in place, for example when running the tests. This patch forces the right path
+ by using LD_LIBRARY_PATH.
+Author: Sébastien Villemot <sebastien@debian.org>
+Forwarded: no
+Last-Update: 2012-12-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Make.inc
++++ b/Make.inc
+@@ -375,7 +375,7 @@
+ ifeq ($(OS), WINNT)
+ JULIA_EXECUTABLE = $(JULIA_EXECUTABLE_release)
+ else
+-JULIA_EXECUTABLE = $(JULIAHOME)/julia
++JULIA_EXECUTABLE = LD_LIBRARY_PATH=$(BUILD)/lib $(JULIAHOME)/julia
+ endif
+ 
+ # Colors for make

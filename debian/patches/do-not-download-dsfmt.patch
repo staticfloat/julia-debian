@@ -1,0 +1,38 @@
+Description: Do not download DSFMT
+ Patched DSFMT is already in orig tarball (see get-orig-source in debian/rules)
+Author: Sébastien Villemot <sebastien@debian.org>
+Forwarded: not-needed
+Last-Update: 2012-11-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/deps/Makefile
++++ b/deps/Makefile
+@@ -534,15 +534,6 @@
+ LIBRANDOM_CFLAGS += -msse2 -DHAVE_SSE2
+ endif
+ 
+-random/dsfmt-$(DSFMT_VER).tar.gz:
+-	$(WGET_DASH_O) $@ http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/SFMT/dSFMT-src-$(DSFMT_VER).tar.gz 
+-	touch -c $@
+-random/dsfmt-$(DSFMT_VER)/config.status: random/dsfmt-$(DSFMT_VER).tar.gz
+-	cd random && \
+-	mkdir -p dsfmt-$(DSFMT_VER) && \
+-	tar -C dsfmt-$(DSFMT_VER) --strip-components 1 -xf dsfmt-$(DSFMT_VER).tar.gz && \
+-	cd dsfmt-$(DSFMT_VER) && patch < ../dSFMT.h.patch && patch < ../dSFMT.c.patch
+-	echo 1 > $@
+ $(LIBRANDOM_OBJ_SOURCE): random/jl_random.c random/randmtzig.c random/dsfmt-$(DSFMT_VER)/config.status
+ 	cd random && \
+ 	$(CC) $(CPPFLAGS) $(LIBRANDOM_CFLAGS) $(LDFLAGS) jl_random.c -o librandom.$(SHLIB_EXT) && \
+@@ -553,10 +544,9 @@
+ clean-random:
+ 	-rm -f random/librandom.$(SHLIB_EXT)
+ distclean-random: clean-random
+-	-cd random && rm -rf *.tar.gz dsfmt-$(DSFMT_VER)
+ 
+-get-random: random/dsfmt-$(DSFMT_VER).tar.gz
+-configure-random: random/dsfmt-$(DSFMT_VER)/config.status
++get-random:
++configure-random:
+ compile-random: $(LIBRANDOM_OBJ_SOURCE)
+ check-random: compile-random
+ install-random: $(LIBRANDOM_OBJ_TARGET)

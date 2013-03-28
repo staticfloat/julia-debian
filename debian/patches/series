@@ -1,0 +1,15 @@
+#no-git.patch
+#use-system-double-conversion.patch
+#do-not-download-dsfmt.patch
+#suitesparse-3.4.patch
+#do-not-download-jquery.patch
+#use-shared-llvm.patch
+#use-sonames-with-dlopen.patch
+#support-noopt.patch
+#fix-cpu-detection.patch
+#do-not-download-patchelf.patch
+#ld-library-path-for-testing.patch
+dpkg-multiarch.patch
+#libjulia-release-drop-soname.patch
+#no-webrepl.patch
+#fix-version.patch

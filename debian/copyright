@@ -1,0 +1,646 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Julia
+Upstream-Contact: julia-dev@googlegroups.com
+Source: http://julialang.org
+ The orig tarball is constructed from the GitHub tag, after removing files not
+ compliant with the DFSG and unneeded embedded dependencies.
+ See the get-orig-source target of debian/rules for details.
+
+Files: *
+Copyright: 2009-2012 Jeff Bezanson, Stefan Karpinski, Viral B. Shah, 
+ and other contributors: https://github.com/JuliaLang/julia/contributors
+License: Expat
+
+Files: contrib/mac-app/script
+Copyright: 2007 Thomas Treichl and Paul Kienzle
+           2008-2009 Thomas Treichl
+           2013 Viral B. Shah
+License: GPL-3+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public
+ License, version 3, can be found in the file
+ `/usr/share/common-licenses/GPL-3'.
+
+Files: extras/json.jl
+       test/perf2/json.jl
+Copyright: 2011 François Glineur
+License: BSD-2-clause
+
+Files: doc/_themes/julia/localtoc.html
+       doc/_themes/julia/searchbox.html
+Copyright: 2007-2011 The Sphinx team
+License: BSD-2-clause
+
+Files: doc/_themes/julia/static/sidebar.js
+Copyright: 2007-2011 The Sphinx team
+           2012 The Julia authors
+License: BSD-2-clause and Expat
+
+Files: test/perf2/ziggurat.c
+Copyright: 2005 Jochen Voss
+License: GPL-2+
+
+Files: src/support/MurmurHash3.c
+       src/support/MurmurHash3.h
+Copyright: none
+License: public-domain
+ MurmurHash3 was written by Austin Appleby, and is placed in the public
+ domain. The author hereby disclaims copyright to this source code.
+
+Files: src/support/asprintf.c
+Copyright: 1997 Todd C. Miller <Todd.Miller AT courtesan.com>
+           2004 Darren Tucker
+License: ISC
+
+Files: src/flisp/flisp.c
+       src/flisp/system.lsp
+Copyright: 2009 Jeff Bezanson
+License: BSD-3-clause
+
+Files: ui/repl-readline.c
+Copyright: 2009-2011 Jeff Bezanson, Stefan Karpinski, Viral B. Shah
+License: GPL-2+
+
+Files: ui/webserver/json.h
+       ui/webserver/jsoncpp.cpp
+Copyright: none
+License: public-domain
+ The author (Baptiste Lepilleur) explicitly disclaims copyright in all 
+ jurisdictions which recognize such a disclaimer. In such jurisdictions, 
+ this software is released into the Public Domain.
+
+Files: ui/website/modernizr-2.5.3.js
+Copyright: 2009-2011 Faruk Ates, Paul Irish, Alex Sexton
+License: Expat
+
+Files: ui/website/jquery.autoresize.js
+Copyright: James Padolsey
+License: WTFPL-2
+ This program is free software. It comes without any warranty, to
+ the extent permitted by applicable law. You can redistribute it
+ and/or modify it under the terms of the Do What The Fuck You Want
+ To Public License, Version 2, as published by Sam Hocevar. See
+ http://sam.zoy.org/wtfpl/COPYING for more details.
+ .
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ .
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+
+Files: ui/website/d3.js
+Copyright: 2012 Michael Bostock
+License: BSD-3-clause
+
+Files: deps/libuv/*
+Copyright: Joyent, Inc. and other Node contributors
+License: Expat
+
+Files: deps/libuv/include/uv-private/tree.h
+       deps/libuv/include/uv-private/ngx-queue.h
+Copyright: 2002 Niels Provos <provos@citi.umich.edu>
+           Igor Sysoev
+License: BSD-2-clause
+
+Files: deps/libuv/include/uv-private/stdint-msvc2008.h
+Copyright: 2006-2008 Alexander Chemeris
+License: BSD-3-clause
+
+Files: deps/libuv/src/inet.c
+Copyright: 2004 Internet Systems Consortium, Inc. ("ISC")
+           1996-1999 Internet Software Consortium
+License: ISC
+
+Files: deps/libuv/checksparse.sh
+Copyright: 2013 Ben Noordhuis <info@bnoordhuis.nl>
+License: ISC
+
+Files: deps/openlibm/*
+Copyright: 2011-2012 Viral B. Shah, Keno Fischer, Jameson Nash
+           2012 Massachusetts Institute of Technology
+License: Expat
+
+Files: deps/openlibm/amos/*
+       deps/openlibm/slatec/*
+Copyright: none
+License: public-domain
+ The Library is in the public domain and distributed by the Energy Science
+ and Technology Software Center.
+ .
+ Energy Science and Technology Software Center
+ P.O. Box 1020
+ Oak Ridge, TN  37831
+Comment:
+ Note that the AMOS library is part of SLATEC and is therefore covered by the
+ same license.
+
+Files: deps/openlibm/amd64/e_remainderf.S
+       deps/openlibm/amd64/s_scalbnl.S
+       deps/openlibm/amd64/e_remainder.S
+       deps/openlibm/amd64/e_remainderl.S
+       deps/openlibm/amd64/s_logbl.S
+       deps/openlibm/amd64/s_rintl.S
+       deps/openlibm/i387/e_log10f.S
+       deps/openlibm/i387/e_logf.S
+       deps/openlibm/i387/e_remainderf.S
+       deps/openlibm/i387/e_sqrtf.S
+       deps/openlibm/i387/s_ceilf.S
+       deps/openlibm/i387/s_ceill.S
+       deps/openlibm/i387/s_copysignf.S
+       deps/openlibm/i387/s_copysignl.S
+       deps/openlibm/i387/s_floorf.S
+       deps/openlibm/i387/s_floorl.S
+       deps/openlibm/i387/s_logbf.S
+       deps/openlibm/i387/s_rintf.S
+       deps/openlibm/i387/s_scalbnf.S
+       deps/openlibm/i387/s_scalbnl.S
+       deps/openlibm/i387/s_significandf.S
+       deps/openlibm/i387/s_trunc.S
+       deps/openlibm/i387/s_truncf.S
+       deps/openlibm/i387/s_truncl.S
+       deps/openlibm/i387/e_exp.S
+       deps/openlibm/i387/e_fmod.S
+       deps/openlibm/i387/e_log.S
+       deps/openlibm/i387/e_log10.S
+       deps/openlibm/i387/e_remainder.S
+       deps/openlibm/i387/e_remainderl.S
+       deps/openlibm/i387/e_sqrt.S
+       deps/openlibm/i387/e_sqrtl.S
+       deps/openlibm/i387/s_ceil.S
+       deps/openlibm/i387/s_copysign.S
+       deps/openlibm/i387/s_cos.S
+       deps/openlibm/i387/s_finite.S
+       deps/openlibm/i387/s_floor.S
+       deps/openlibm/i387/s_logb.S
+       deps/openlibm/i387/s_logbl.S
+       deps/openlibm/i387/s_rint.S
+       deps/openlibm/i387/s_rintl.S
+       deps/openlibm/i387/s_scalbn.S
+       deps/openlibm/i387/s_significand.S
+       deps/openlibm/i387/s_sin.S
+       deps/openlibm/i387/s_tan.S
+       deps/openlibm/src/w_cabs.c
+       deps/openlibm/src/w_cabsf.c
+       deps/openlibm/src/w_cabsl.c
+       deps/openlibm/src/w_drem.c
+       deps/openlibm/src/w_dremf.c
+Copyright: none
+License: public-domain
+ Based on code written by J.T. Conklin <jtc@netbsd.org>
+
+Files: deps/openlibm/src/e_acos.c
+       deps/openlibm/src/e_acosf.c
+       deps/openlibm/src/e_acosh.c
+       deps/openlibm/src/e_acoshf.c
+       deps/openlibm/src/e_acosl.c
+       deps/openlibm/src/e_asin.c
+       deps/openlibm/src/e_asinf.c
+       deps/openlibm/src/e_asinl.c
+       deps/openlibm/src/e_atan2.c
+       deps/openlibm/src/e_atan2f.c
+       deps/openlibm/src/e_atan2l.c
+       deps/openlibm/src/e_atanh.c
+       deps/openlibm/src/e_atanhf.c
+       deps/openlibm/src/e_cosh.c
+       deps/openlibm/src/e_coshf.c
+       deps/openlibm/src/e_exp.c
+       deps/openlibm/src/e_expf.c
+       deps/openlibm/src/e_fmod.c
+       deps/openlibm/src/e_fmodf.c
+       deps/openlibm/src/e_fmodl.c
+       deps/openlibm/src/e_gamma.c
+       deps/openlibm/src/e_gamma_r.c
+       deps/openlibm/src/e_gammaf.c
+       deps/openlibm/src/e_gammaf_r.c
+       deps/openlibm/src/e_hypot.c
+       deps/openlibm/src/e_hypotf.c
+       deps/openlibm/src/e_hypotl.c
+       deps/openlibm/src/e_j0.c
+       deps/openlibm/src/e_j0f.c
+       deps/openlibm/src/e_j1.c
+       deps/openlibm/src/e_j1f.c
+       deps/openlibm/src/e_jn.c
+       deps/openlibm/src/e_jnf.c
+       deps/openlibm/src/e_lgamma.c
+       deps/openlibm/src/e_lgamma_r.c
+       deps/openlibm/src/e_lgammaf.c
+       deps/openlibm/src/e_lgammaf_r.c
+       deps/openlibm/src/e_log.c
+       deps/openlibm/src/e_log10.c
+       deps/openlibm/src/e_log10f.c
+       deps/openlibm/src/e_log2.c
+       deps/openlibm/src/e_log2f.c
+       deps/openlibm/src/e_logf.c
+       deps/openlibm/src/e_pow.c
+       deps/openlibm/src/e_powf.c
+       deps/openlibm/src/e_rem_pio2.c
+       deps/openlibm/src/e_rem_pio2f.c
+       deps/openlibm/src/e_remainder.c
+       deps/openlibm/src/e_remainderf.c
+       deps/openlibm/src/e_scalb.c
+       deps/openlibm/src/e_scalbf.c
+       deps/openlibm/src/e_sinh.c
+       deps/openlibm/src/e_sinhf.c
+       deps/openlibm/src/e_sqrt.c
+       deps/openlibm/src/e_sqrtf.c
+       deps/openlibm/src/k_cos.c
+       deps/openlibm/src/k_cosf.c
+       deps/openlibm/src/k_log.h
+       deps/openlibm/src/k_logf.h
+       deps/openlibm/src/k_rem_pio2.c
+       deps/openlibm/src/k_sin.c
+       deps/openlibm/src/k_sinf.c
+       deps/openlibm/src/k_tan.c
+       deps/openlibm/src/k_tanf.c
+       deps/openlibm/src/math_private.h
+       deps/openlibm/src/openlibm.h
+       deps/openlibm/src/s_asinh.c
+       deps/openlibm/src/s_asinhf.c
+       deps/openlibm/src/s_atan.c
+       deps/openlibm/src/s_atanf.c
+       deps/openlibm/src/s_atanl.c
+       deps/openlibm/src/s_cbrt.c
+       deps/openlibm/src/s_cbrtf.c
+       deps/openlibm/src/s_ceil.c
+       deps/openlibm/src/s_ceilf.c
+       deps/openlibm/src/s_ceill.c
+       deps/openlibm/src/s_copysign.c
+       deps/openlibm/src/s_copysignf.c
+       deps/openlibm/src/s_cos.c
+       deps/openlibm/src/s_cosf.c
+       deps/openlibm/src/s_erf.c
+       deps/openlibm/src/s_erff.c
+       deps/openlibm/src/s_expm1.c
+       deps/openlibm/src/s_expm1f.c
+       deps/openlibm/src/s_fabs.c
+       deps/openlibm/src/s_fabsf.c
+       deps/openlibm/src/s_finite.c
+       deps/openlibm/src/s_finitef.c
+       deps/openlibm/src/s_floor.c
+       deps/openlibm/src/s_floorf.c
+       deps/openlibm/src/s_floorl.c
+       deps/openlibm/src/s_frexp.c
+       deps/openlibm/src/s_frexpf.c
+       deps/openlibm/src/s_ilogb.c
+       deps/openlibm/src/s_ilogbf.c
+       deps/openlibm/src/s_ilogbl.c
+       deps/openlibm/src/s_log1p.c
+       deps/openlibm/src/s_log1pf.c
+       deps/openlibm/src/s_logb.c
+       deps/openlibm/src/s_logbf.c
+       deps/openlibm/src/s_logbl.c
+       deps/openlibm/src/s_modf.c
+       deps/openlibm/src/s_modff.c
+       deps/openlibm/src/s_nextafter.c
+       deps/openlibm/src/s_nextafterf.c
+       deps/openlibm/src/s_nextafterl.c
+       deps/openlibm/src/s_nexttoward.c
+       deps/openlibm/src/s_nexttowardf.c
+       deps/openlibm/src/s_remquo.c
+       deps/openlibm/src/s_remquof.c
+       deps/openlibm/src/s_remquol.c
+       deps/openlibm/src/s_rint.c
+       deps/openlibm/src/s_rintf.c
+       deps/openlibm/src/s_scalbn.c
+       deps/openlibm/src/s_scalbnf.c
+       deps/openlibm/src/s_scalbnl.c
+       deps/openlibm/src/s_significand.c
+       deps/openlibm/src/s_significandf.c
+       deps/openlibm/src/s_sin.c
+       deps/openlibm/src/s_sinf.c
+       deps/openlibm/src/s_tan.c
+       deps/openlibm/src/s_tanf.c
+       deps/openlibm/src/s_tanh.c
+       deps/openlibm/src/s_tanhf.c
+       deps/openlibm/src/s_trunc.c
+       deps/openlibm/src/s_truncf.c
+       deps/openlibm/src/s_truncl.c
+       deps/openlibm/src/s_cbrtl.c
+       deps/openlibm/ld128/e_rem_pio2l.h
+       deps/openlibm/ld128/k_cosl.c
+       deps/openlibm/ld128/k_sinl.c
+       deps/openlibm/ld128/k_tanl.c
+       deps/openlibm/ld80/e_rem_pio2l.h
+       deps/openlibm/ld80/k_cosl.c
+       deps/openlibm/ld80/k_sinl.c
+       deps/openlibm/ld80/k_tanl.c
+Copyright: 1993, 2004 Sun Microsystems, Inc.
+           2008-2011 Steven G. Kargl, David Schultz, Bruce D. Evans
+License: permissive
+ Permission to use, copy, modify, and distribute this
+ software is freely granted, provided that this notice 
+ is preserved.
+
+Files: deps/openlibm/amd64/e_sqrt.S
+       deps/openlibm/amd64/e_sqrtf.S
+       deps/openlibm/amd64/e_sqrtl.S
+       deps/openlibm/amd64/fenv.c
+       deps/openlibm/amd64/fenv.h
+       deps/openlibm/amd64/s_llrintl.S
+       deps/openlibm/amd64/s_lrint.S
+       deps/openlibm/amd64/s_lrintf.S
+       deps/openlibm/amd64/s_lrintl.S
+       deps/openlibm/amd64/s_remquo.S
+       deps/openlibm/amd64/s_remquof.S
+       deps/openlibm/amd64/s_remquol.S
+       deps/openlibm/amd64/s_scalbn.S
+       deps/openlibm/amd64/s_scalbnf.S
+       deps/openlibm/arm/fenv.c
+       deps/openlibm/arm/fenv.h
+       deps/openlibm/i387/fenv.c
+       deps/openlibm/i387/fenv.h
+       deps/openlibm/i387/invtrig.c
+       deps/openlibm/i387/s_llrint.S
+       deps/openlibm/i387/s_llrintf.S
+       deps/openlibm/i387/s_llrintl.S
+       deps/openlibm/i387/s_lrint.S
+       deps/openlibm/i387/s_lrintf.S
+       deps/openlibm/i387/s_lrintl.S
+       deps/openlibm/i387/s_remquo.S
+       deps/openlibm/i387/s_remquof.S
+       deps/openlibm/i387/s_remquol.S
+       deps/openlibm/ia64/fenv.c
+       deps/openlibm/ia64/fenv.h
+       deps/openlibm/ia64/s_fma.S
+       deps/openlibm/ia64/s_fmaf.S
+       deps/openlibm/ia64/s_fmal.S
+       deps/openlibm/include/amd64_fpmath.h
+       deps/openlibm/include/i386_fpmath.h
+       deps/openlibm/include/fpmath.h
+       deps/openlibm/ld128/invtrig.c
+       deps/openlibm/ld128/invtrig.h
+       deps/openlibm/ld128/s_exp2l.c
+       deps/openlibm/ld80/invtrig.c
+       deps/openlibm/ld80/invtrig.h
+       deps/openlibm/ld80/s_exp2l.c
+       deps/openlibm/mips/fenv.c
+       deps/openlibm/mips/fenv.h
+       deps/openlibm/powerpc/fenv.c
+       deps/openlibm/powerpc/fenv.h
+       deps/openlibm/sparc64/e_sqrt.S
+       deps/openlibm/sparc64/e_sqrtf.S
+       deps/openlibm/sparc64/fenv.c
+       deps/openlibm/sparc64/fenv.h
+       deps/openlibm/src/e_remainderl.c
+       deps/openlibm/src/k_exp.c
+       deps/openlibm/src/k_expf.c
+       deps/openlibm/src/s_carg.c
+       deps/openlibm/src/s_cargf.c
+       deps/openlibm/src/s_cargl.c
+       deps/openlibm/src/s_cexp.c
+       deps/openlibm/src/s_cexpf.c
+       deps/openlibm/src/s_cproj.c
+       deps/openlibm/src/s_cprojf.c
+       deps/openlibm/src/s_cprojl.c
+       deps/openlibm/src/s_csqrt.c
+       deps/openlibm/src/s_csqrtf.c
+       deps/openlibm/src/s_csqrtl.c
+       deps/openlibm/src/s_exp2.c
+       deps/openlibm/src/s_exp2f.c
+       deps/openlibm/src/s_fdim.c
+       deps/openlibm/src/s_fma.c
+       deps/openlibm/src/s_fmaf.c
+       deps/openlibm/src/s_fmal.c
+       deps/openlibm/src/s_fmax.c
+       deps/openlibm/src/s_fmaxf.c
+       deps/openlibm/src/s_fmaxl.c
+       deps/openlibm/src/s_fmin.c
+       deps/openlibm/src/s_fminf.c
+       deps/openlibm/src/s_fminl.c
+       deps/openlibm/src/s_fpclassify.c
+       deps/openlibm/src/s_frexpl.c
+       deps/openlibm/src/s_isfinite.c
+       deps/openlibm/src/s_isinf.c
+       deps/openlibm/src/s_isnan.c
+       deps/openlibm/src/s_isnormal.c
+       deps/openlibm/src/s_lrint.c
+       deps/openlibm/src/s_lround.c
+       deps/openlibm/src/s_nearbyint.c
+       deps/openlibm/src/s_rintl.c
+       deps/openlibm/src/s_scalbln.c
+       deps/openlibm/src/s_tgammaf.c
+       deps/openlibm/src/s_cimag.c
+       deps/openlibm/src/s_cimagf.c
+       deps/openlibm/src/s_cimagl.c
+       deps/openlibm/src/s_conj.c
+       deps/openlibm/src/s_conjf.c
+       deps/openlibm/src/s_conjl.c
+       deps/openlibm/src/s_copysignl.c
+       deps/openlibm/src/s_creal.c
+       deps/openlibm/src/s_crealf.c
+       deps/openlibm/src/s_creall.c
+       deps/openlibm/src/e_sqrtl.c
+       deps/openlibm/src/s_cosl.c
+       deps/openlibm/src/s_round.c
+       deps/openlibm/src/s_roundf.c
+       deps/openlibm/src/s_roundl.c
+       deps/openlibm/src/s_sinl.c
+       deps/openlibm/src/s_tanl.c
+       deps/openlibm/ld128/s_nanl.c
+       deps/openlibm/ld80/s_nanl.c
+       deps/openlibm/src/s_ctanh.c
+       deps/openlibm/src/s_ctanhf.c
+       deps/openlibm/src/s_nan.c
+       deps/openlibm/src/s_ccosh.c
+       deps/openlibm/src/s_ccoshf.c
+       deps/openlibm/src/s_csinh.c
+       deps/openlibm/src/s_csinhf.c
+       deps/openlibm/src/s_modfl.c
+       deps/openlibm/src/s_signbit.c
+Copyright: 2002-2008, 2011 David Schultz <das@FreeBSD.ORG>
+           2004 Stefan Farfeleder
+           2003, 2005, 2007 Steven G. Kargl
+           2005 Bruce D. Evans
+           2003 Mike Barcroft <mike@FreeBSD.org>
+           1993 Sun Microsystems, Inc.
+License: BSD-2-clause
+
+Files: deps/openlibm/amd64/bsd_asm.h
+       deps/openlibm/amd64/bsd_fpu.h
+       deps/openlibm/amd64/bsd_cdefs.h
+       deps/openlibm/amd64/bsd_ieeefp.h
+       deps/openlibm/i387/bsd_asm.h
+       deps/openlibm/i387/bsd_npx.h
+       deps/openlibm/i387/bsd_cdefs.h
+       deps/openlibm/src/s_fabsl.c
+       deps/openlibm/bsdsrc/b_exp.c
+       deps/openlibm/bsdsrc/b_log.c
+       deps/openlibm/bsdsrc/b_tgamma.c
+       deps/openlibm/bsdsrc/mathimpl.h
+Copyright: 1985, 1988, 1990-1993 The Regents of the University of California
+           2003 Dag-Erling Coïdan Smørgrav
+           1990 Andrew Moore, Talke Studio
+           2003 Peter Wemm
+License: BSD-3-clause
+
+Files: deps/openlibm/test/libm-test.c
+       deps/openlibm/test/test-double.c
+       deps/openlibm/test/test-float.c
+Copyright: 1997-2001 Free Software Foundation, Inc
+License: LGPL-2.1+
+
+Files: deps/random/dsfmt-2.2/*
+Copyright: 2002, 2006-2009, 2011-2012 Mutsuo Saito, Makoto Matsumoto, Hiroshima University and The University of Tokyo
+License: BSD-3-clause
+
+Files: deps/random/randmtzig.c
+Copyright: 1997-2002 Makoto Matsumoto and Takuji Nishimura
+           2004 David Bateman
+           2012 Viral B. Shah
+License: BSD-3-clause
+
+Files: deps/Rmath/*
+Copyright: 1998-2006 Ross Ihaka
+           1998-2012 The R Core Team
+           2002-2010 The R Foundation
+           1995-1996 Robert Gentleman and Ross Ihaka
+           1974, 1977, 1979, 1988, 1989, 1990, 1992, 1995 Royal Statistical Society
+           2004-2006 Morten Welinder <terra@gnome.org>
+License: GPL-2+
+
+Files: deps/Rmath/include/Rmath.h
+       deps/Rmath/include/Rmath.h0
+       deps/Rmath/include/R_ext/Arith.h
+       deps/Rmath/include/R_ext/Error.h
+       deps/Rmath/include/R_ext/Print.h
+       deps/Rmath/include/R_ext/Random.h
+       deps/Rmath/include/R_ext/Boolean.h
+       deps/Rmath/include/R_ext/RS.h
+       deps/Rmath/include/R_ext/libextern.h
+Copyright: 1998-2011 The R Core Team
+           2004 The R Foundation
+           1995-1996 Robert Gentleman and Ross Ihaka
+License: LGPL-2.1+
+
+Files: debian/*
+Copyright: 2012-2013 Sébastien Villemot <sebastien@debian.org>
+License: Expat
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining
+ a copy of this software and associated documentation files (the
+ "Software"), to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to
+ the following conditions:
+ . 
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ . 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+License: BSD-2-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+ .
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-3-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the author nor the names of any contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: GPL-2+
+ This program is free software: you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation, either version 2 of
+ the License, or (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see
+ <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public
+ License, version 2, can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+
+License: ISC
+ Permission to use, copy, modify, and distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; either version 2.1 of the License, or (at
+ your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public License
+ along with this library. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public
+ License, version 2.1, can be found in the file
+ `/usr/share/common-licenses/LGPL-2.1'.
+

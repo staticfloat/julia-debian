@@ -1,0 +1,28 @@
+Description: Adapt for SuiteSparse 3.4
+ Upstream uses SuiteSparse 4.0, which is API-incompatible and not yet in Debian
+ unstable.
+Author: Sébastien Villemot <sebastien@debian.org>
+Forwarded: not-needed
+Last-Update: 2012-11-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/deps/SuiteSparse_wrapper.c
++++ b/deps/SuiteSparse_wrapper.c
+@@ -132,7 +132,7 @@
+     case CHOLMOD_INTLONG:
+         isize = sizeof(int); break;
+     case CHOLMOD_LONG:
+-        isize =  sizeof(SuiteSparse_long); break;
++        isize =  sizeof(UF_long); break;
+     default:
+         return 3;
+     }
+@@ -141,7 +141,7 @@
+ 
+     if (cs->itype == CHOLMOD_INTLONG) {
+         int i, *dpt = (int *) cp;
+-        SuiteSparse_long *spt = (SuiteSparse_long *) cs->p;
++        UF_long *spt = (UF_long *) cs->p;
+         for (i = 0; i <= cs->ncol; ++i) dpt[i] = spt[i];
+     } else {
+         memcpy(cp, cs->p, (cs->ncol + 1) * isize);

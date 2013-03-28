@@ -1,0 +1,154 @@
+julia (0.1.2.gitf456a28-1) precise; urgency=low
+
+  * nightly build
+
+ -- Elliot Saba <staticfloat@gmail.com>  Wed, 27 Mar 2013 21:28:46 -0700
+
+julia (0.1.2+dfsg-1) unstable; urgency=low
+
+  * Imported Upstream version 0.1.2+dfsg.
+    Contains hotfix for package manager.
+  * debian/patches/fix-version.patch: new patch
+  * Refresh other patches
+
+ -- Sébastien Villemot <sebastien@debian.org>  Thu, 07 Mar 2013 20:50:18 +0100
+
+julia (0.1.1+dfsg-1) unstable; urgency=low
+
+  * Imported Upstream version 0.1.1+dfsg
+  * debian/copyright: reflect upstream changes
+  * Refresh patches
+  * Disable tk-wrapper, since it is no longer built upstream
+  * Update README.debian
+
+ -- Sébastien Villemot <sebastien@debian.org>  Thu, 07 Mar 2013 12:14:59 +0100
+
+julia (0.1+dfsg-1) unstable; urgency=low
+
+  * First upstream release!
+  * debian/copyright: document how to recreate orig tarball
+  * Add a debian/watch file
+  * d/rules, d/p/no-git-patch: adapt for numbered releases.
+    In particular, add a COMMITSHA file in the orig tarball containing the
+    SHA of the release tag.
+  * Promote zlib1g and libarpack2 to Depends
+  * Fix typo in manpage
+
+ -- Sébastien Villemot <sebastien@debian.org>  Thu, 14 Feb 2013 12:00:05 +0100
+
+julia (0.1~20130213.git4bc33bbc-1) unstable; urgency=low
+
+  * New upstream release candidate.
+    Hopefully obviates the need of ugly hacks in libuv in order to build on
+    build daemons.
+  * Remove obsolete patches:
+     + bump-version-0.1.patch
+     + disable-final-uv-loop.patch
+     + revert-stdin-file-iostream.patch
+  * Refresh other patches
+
+ -- Sébastien Villemot <sebastien@debian.org>  Wed, 13 Feb 2013 10:58:23 +0100
+
+julia (0.1~20130212.gitf375d4bb-1) unstable; urgency=low
+
+  * New upstream snapshot.
+  * no-git.patch: simplify and improve patch
+  * gsvddense_blasint.patch: remove patch, applied upstream
+  * New patches:
+    	+ bump-version-0.1.patch
+    	+ disable-final-uv-loop.patch
+    	+ revert-stdin-file-iostream.patch
+  * Refresh other patches
+
+ -- Sébastien Villemot <sebastien@debian.org>  Tue, 12 Feb 2013 12:02:24 +0100
+
+julia (0.1~20130211.git86fbe98d-1) unstable; urgency=low
+
+  * New upstream snapshot.
+  * debian/control:
+     + add git to Recommends (for Julia package manager)
+     + remove dependencies on libglpk-dev (it moved to its own package)
+     + add explicit dependency on libgmp10 (there is no more a wrapper)
+  * fix-clean-rules.patch: remove patch, applied upstream
+  * gsvddense_blasint.patch: new patch
+  * Refresh other patches
+
+ -- Sébastien Villemot <sebastien@debian.org>  Mon, 11 Feb 2013 03:51:26 +0100
+
+julia (0.0.0+20130206.git32ff5759-1) unstable; urgency=low
+
+  * New upstream snapshot.
+  * debian/copyright: reflect upstream changes
+  * debian/rules: update get-orig-source to reflect upstream changes
+     + Don't ship nginx
+     + Adapt for new configure-random target in deps/Makefile
+  * Enable build of Tk wrapper.
+     + debian/control: add build dependency on tk-dev
+     + debian/rules: add tk rule to build-arch
+  * debian/julia.install: install VERSION and COMMIT files
+  * no-webrepl.patch: new patch
+  * Refresh other patches
+  * Add source override for config.status file under deps/random/
+
+ -- Sébastien Villemot <sebastien@debian.org>  Wed, 06 Feb 2013 17:54:29 +0100
+
+julia (0.0.0+20130107.gitd9656f41-2) unstable; urgency=low
+
+  * fix-cpu-detection.patch: do not use -momit-leaf-frame-pointer on non-x86
+    archs
+  * Upgrade to LLVM 3.2.
+     + debian/control: bump build-dependency
+     + debian/rules: use llvm-config-3.2
+     + debian/patches/use-shared-llvm.patch
+       debian/patches/use-sonames-with-dlopen.patch: update patches
+
+ -- Sébastien Villemot <sebastien@debian.org>  Sat, 19 Jan 2013 15:33:43 +0100
+
+julia (0.0.0+20130107.gitd9656f41-1) unstable; urgency=low
+
+  * New upstream snashot
+  * No longer try to rebuild helpdb.jl.
+     + debian/rules: remove helpdb.jl from build-arch rule
+     + debian/control: move back python-sphinx to Build-Depends-Indep
+  * debian/copyright: reflect upstream changes
+  * Add Build-Conflicts on libatlas3-base (makes linalg tests fail)
+  * debian/rules: replace obsolete USE_DEBIAN makeflag by a list of
+    USE_SYSTEM_* flags
+  * debian/rules: on non-x86 systems, use libm instead of openlibm
+  * dpkg-buildflags.patch: remove patch, applied upstream
+  * Refreshed other patches
+
+ -- Sébastien Villemot <sebastien@debian.org>  Wed, 16 Jan 2013 12:29:42 +0100
+
+julia (0.0.0+20121214.gitdced1f7-1) unstable; urgency=low
+
+  * New upstream snapshot.
+  * debian/copyright: reflect upstream changes
+  * Embedded libuv no longer uses libc-ares and libev.
+     + debian/control: remove them from build-dependencies
+     + debian/rules: no longer strip them from upstream tarball
+     + use-system-{ev,c-ares}.patch: remove patches
+  * Remove other patches merged upstream or no longer necessary
+     + fhs-multiarch.patch
+     + linalg-test-tolerance.patch
+     + remove-rpath.patch
+     + verbose-build.patch
+  * New patches
+     + do-not-download-patchelf.patch
+     + ld-library-path-for-testing.patch
+     + dpkg-multiarch.patch
+     + libjulia-release-drop-soname.patch
+  * Refresh other patches
+  * debian/rules:
+     + compile with MULTIARCH_INSTALL=1
+     + build helpdb.jl as part of the build-arch rule
+     + abort on failures in extra tests
+  * debian/control: move python-sphinx to Build-Depends (now used in build-arch)
+
+ -- Sébastien Villemot <sebastien@debian.org>  Tue, 18 Dec 2012 14:42:23 +0100
+
+julia (0.0.0+20121102.git63e93f2-1) unstable; urgency=low
+
+  * Initial release. (Closes: #691912)
+
+ -- Sébastien Villemot <sebastien@debian.org>  Fri, 02 Nov 2012 16:29:29 +0100

@@ -1,0 +1,39 @@
+Source: julia
+Priority: extra
+Maintainer: Debian Julia Team <pkg-julia-devel@lists.alioth.debian.org>
+Uploaders: Sébastien Villemot <sebastien@debian.org>
+Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), dh-exec, llvm-3.2-dev,
+ libdouble-conversion-dev, libsuitesparse-dev, gfortran,
+ libgmp-dev, libreadline6-dev, libunwind7-dev | libunwind8-dev, libfftw3-dev, libpcre3-dev,
+ libarpack2-dev, libncurses5-dev
+Build-Conflicts: libatlas3-base
+Standards-Version: 3.9.4
+Section: science
+Homepage: http://julialang.org
+Vcs-Git: git://git.debian.org/git/pkg-julia/julia.git
+Vcs-Browser: http://git.debian.org/?p=pkg-julia/julia.git
+
+Package: julia
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+# NB: several shared libs have to be hardcoded because they are dlopen'd from
+# Julia scripts, and therefore dpkg-shlibdeps cannot detect them
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libopenblas-base | libblas3 | libatlas3-base,
+ liblapack3 | libatlas3-base, libpcre3, libfftw3-3, libcholmod1.7.1,
+ libumfpack5.4.0, libgmp10, zlib1g, libarpack2
+Recommends: git
+Suggests: ess (>= 12.09-1~)
+Description: high-performance programming language for technical computing
+ Julia is a high-level, high-performance dynamic programming language for
+ technical computing, with syntax that is familiar to users of other technical
+ computing environments. It provides a sophisticated compiler, distributed
+ parallel execution, numerical accuracy, and an extensive mathematical function
+ library. The library, mostly written in Julia itself, also integrates mature,
+ best-of-breed C and Fortran libraries for linear algebra, random number
+ generation, FFTs, and string processing. Julia programs are organized around
+ defining functions, and overloading them for different combinations of
+ argument types (which can also be user-defined).
+ .
+ This package provides a complete Julia installation (JIT compiler, standard
+ library, text-based user interface).

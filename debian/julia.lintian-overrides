@@ -1,0 +1,1 @@
+hardening-no-fortify-functions usr/lib/*/julia/libopenlibm.so

@@ -1,0 +1,436 @@
+Description: Hardcode SONAMEs of system libraries
+ The .so symlinks are not available unless -dev packages are installed (and we
+ don't want to force users to install -dev packages of all library
+ dependencies). This patch has to be kept in sync with dependencies of the julia
+ package, as listed in debian/control.
+Author: Sébastien Villemot <sebastien@debian.org>
+Forwarded: not-needed
+Last-Update: 2012-11-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Make.inc
++++ b/Make.inc
+@@ -211,7 +211,7 @@
+ LIBBLASNAME = libblas
+ else
+ LIBBLAS = -lblas
+-LIBBLASNAME = libblas
++LIBBLASNAME = libblas.so.3
+ endif
+ else
+ LIBBLAS = -L$(BUILD)/lib -lopenblas
+@@ -224,7 +224,7 @@
+ LIBLAPACKNAME = liblapack
+ else
+ LIBLAPACK = -llapack
+-LIBLAPACKNAME = liblapack
++LIBLAPACKNAME = liblapack.so.3
+ endif
+ else
+ LIBLAPACK = $(LIBBLAS)
+--- a/base/pcre.jl
++++ b/base/pcre.jl
+@@ -4,7 +4,7 @@
+ 
+ include("pcre_h.jl")
+ 
+-const VERSION = bytestring(ccall((:pcre_version, :libpcre), Ptr{Uint8}, ()))
++const VERSION = bytestring(ccall((:pcre_version, "libpcre.so.3"), Ptr{Uint8}, ()))
+ 
+ # supported options for different use cases
+ 
+@@ -49,7 +49,7 @@
+     extra::Ptr{Void}, what::Integer, ::Type{T}
+ )
+     buf = Array(Uint8,sizeof(T))
+-    ret = ccall((:pcre_fullinfo, :libpcre), Int32,
++    ret = ccall((:pcre_fullinfo, "libpcre.so.3"), Int32,
+                 (Ptr{Void}, Ptr{Void}, Int32, Ptr{Uint8}),
+                 regex, extra, what, buf)
+     if ret != 0
+@@ -65,7 +65,7 @@
+ function compile(pattern::String, options::Integer)
+     errstr = Array(Ptr{Uint8},1)
+     erroff = Array(Int32,1)
+-    re_ptr = (()->ccall((:pcre_compile, :libpcre), Ptr{Void},
++    re_ptr = (()->ccall((:pcre_compile, "libpcre.so.3"), Ptr{Void},
+                         (Ptr{Uint8}, Int32, Ptr{Ptr{Uint8}}, Ptr{Int32}, Ptr{Uint8}),
+                         pattern, options, errstr, erroff, C_NULL))()
+     if re_ptr == C_NULL
+@@ -82,7 +82,7 @@
+ function study(regex::Array{Uint8}, options::Integer)
+     # NOTE: options should always be zero in current PCRE
+     errstr = Array(Ptr{Uint8},1)
+-    extra = ccall((:pcre_study, :libpcre), Ptr{Void},
++    extra = ccall((:pcre_study, "libpcre.so.3"), Ptr{Void},
+                   (Ptr{Void}, Int32, Ptr{Ptr{Uint8}}),
+                   regex, options, errstr)
+     if errstr[1] != C_NULL
+@@ -93,7 +93,7 @@
+ study(re::Array{Uint8}) = study(re, int32(0))
+ 
+ free_study(extra::Ptr{Void}) =
+-    ccall((:pcre_free_study, :libpcre), Void, (Ptr{Void},), extra)
++    ccall((:pcre_free_study, "libpcre.so.3"), Void, (Ptr{Void},), extra)
+ 
+ function exec(regex::Array{Uint8}, extra::Ptr{Void},
+               str::ByteString, offset::Integer, options::Integer, cap::Bool)
+@@ -102,7 +102,7 @@
+     end
+     ncap = info(regex, extra, INFO_CAPTURECOUNT, Int32)
+     ovec = Array(Int32, 3(ncap+1))
+-    n = ccall((:pcre_exec, :libpcre), Int32,
++    n = ccall((:pcre_exec, "libpcre.so.3"), Int32,
+               (Ptr{Void}, Ptr{Void}, Ptr{Uint8}, Int32,
+                Int32, Int32, Ptr{Int32}, Int32),
+               regex, extra, str, length(str.data),
+--- a/extras/strpack.jl
++++ b/extras/strpack.jl
+@@ -510,7 +510,7 @@
+ show_struct_layout(s::Struct, strategy::DataAlign, width) = show_struct_layout(s, strategy, width, 10)
+ 
+ ## Native layout ##
+-const libLLVM = dlopen("libLLVM-3.2svn")
++const libLLVM = dlopen("libLLVM-3.2.so.1")
+ const LLVMAlign = dlsym(libLLVM, :LLVMPreferredAlignmentOfType)
+ macro llvmalign(tsym)
+     quote
+--- a/extras/suitesparse.jl
++++ b/extras/suitesparse.jl
+@@ -32,8 +32,8 @@
+ include("suitesparse_h.jl")
+ 
+ const libsuitesparse_wrapper = "libsuitesparse_wrapper"
+-const libcholmod = "libcholmod"
+-const libumfpack = "libumfpack"
++const libcholmod = "libcholmod.so.1.7.1"
++const libumfpack = "libumfpack.so.5.4.0"
+ const libspqr = "libspqr"
+ 
+ const _chm_aat       = (:cholmod_aat, libcholmod)
+--- a/extras/zlib_h.jl
++++ b/extras/zlib_h.jl
+@@ -1,6 +1,6 @@
+ # general zlib constants, definitions
+ 
+-const _zlib = "libz"
++const _zlib = "libz.so.1"
+ 
+ # Constants
+ 
+@@ -78,7 +78,7 @@
+ # Get compile-time option flags
+ zlib_compile_flags = ccall((:zlibCompileFlags, _zlib), Uint, ())
+ 
+-let _zlib_h = dlopen("libz")
++let _zlib_h = dlopen("libz.so.1")
+     global ZFileOffset
+ 
+     z_off_t_sz   = 2 << ((zlib_compile_flags >> 6) & uint(3))
+--- a/extras/arpack.jl
++++ b/extras/arpack.jl
+@@ -2,7 +2,7 @@
+ 
+ export eigs, svds
+ 
+-const libarpack = "libarpack"
++const libarpack = "libarpack.so.2"
+ 
+ import Base.BlasInt
+ import Base.blas_int
+--- a/extras/gzip.jl
++++ b/extras/gzip.jl
+@@ -186,7 +186,7 @@
+     @test_gzerror(s, ccall((:gzread, _zlib), Int32, (Ptr{Void}, Ptr{Void}, Uint32),
+                            s.gz_file, p, len),                          -1)
+ 
+-let _zlib_h = dlopen("libz")
++let _zlib_h = dlopen("libz.so.1")
+     global gzbuffer, _gzopen, _gzseek, _gztell
+ 
+     # Doesn't exist in zlib 1.2.3 or earlier
+--- a/test/zlib.jl
++++ b/test/zlib.jl
+@@ -49,7 +49,7 @@
+ @test(z_uLong_sz == sizeof(Uint))
+ @test(z_voidpf_sz == sizeof(Ptr))
+ 
+-let _zlib_h = dlopen("libz")
++let _zlib_h = dlopen("libz.so.1")
+    @test(z_off_t_sz == sizeof(Zlib.ZFileOffset) || (dlsym_e(_zlib_h, :gzopen64) != C_NULL && sizeof(Zlib.ZFileOffset) == 8))
+ end
+ 
+--- a/base/bigfloat.jl
++++ b/base/bigfloat.jl
+@@ -2,7 +2,7 @@
+     mpf::Vector{Int32}
+     function BigFloat() 
+         z = Array(Int32, 6)
+-        ccall((:__gmpf_init,:libgmp), Void, (Ptr{Void},), z)
++        ccall((:__gmpf_init,"libgmp.so.10"), Void, (Ptr{Void},), z)
+         b = new(z)
+         finalizer(b, BigFloat_clear)
+         return b
+@@ -11,32 +11,32 @@
+ 
+ function BigFloat(x::String)
+     z = BigFloat()
+-    err = ccall((:__gmpf_set_str, :libgmp), Int32, (Ptr{Void}, Ptr{Uint8}, Int32), z.mpf, bytestring(x), 0)
++    err = ccall((:__gmpf_set_str, "libgmp.so.10"), Int32, (Ptr{Void}, Ptr{Uint8}, Int32), z.mpf, bytestring(x), 0)
+     if err != 0; error("Invalid input"); end
+     return z
+ end
+ 
+ function BigFloat(x::Float64)
+     z = BigFloat()
+-    ccall((:__gmpf_set_d, :libgmp), Void, (Ptr{Void}, Float64), z.mpf, x)
++    ccall((:__gmpf_set_d, "libgmp.so.10"), Void, (Ptr{Void}, Float64), z.mpf, x)
+     return z
+ end
+ 
+ function BigFloat(x::Uint)
+     z = BigFloat()
+-    ccall((:__gmpf_set_ui, :libgmp), Void, (Ptr{Void}, Uint), z.mpf, x)
++    ccall((:__gmpf_set_ui, "libgmp.so.10"), Void, (Ptr{Void}, Uint), z.mpf, x)
+     return z
+ end
+ 
+ function BigFloat(x::Int)
+     z = BigFloat()
+-    ccall((:__gmpf_set_si, :libgmp), Void, (Ptr{Void}, Int), z.mpf, x)
++    ccall((:__gmpf_set_si, "libgmp.so.10"), Void, (Ptr{Void}, Int), z.mpf, x)
+     return z
+ end
+ 
+ function BigFloat(x::BigInt)
+     z = BigFloat()
+-    ccall((:__gmpf_set_z, :libgmp), Void, (Ptr{Void}, Ptr{Void}), z.mpf, x.mpz)
++    ccall((:__gmpf_set_z, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}), z.mpf, x.mpz)
+     return z
+ end
+ 
+@@ -55,7 +55,7 @@
+ convert(::Type{BigFloat}, x::Float64) = BigFloat(x)
+ convert(::Type{BigFloat}, x::Float32) = BigFloat(float64(x))
+ convert(::Type{BigFloat}, x::BigInt) = BigFloat(x)
+-convert(::Type{Float64}, x::BigFloat) = ccall((:__gmpf_get_d,:libgmp), Float64, (Ptr{Void},), x.mpf)
++convert(::Type{Float64}, x::BigFloat) = ccall((:__gmpf_get_d,"libgmp.so.10"), Float64, (Ptr{Void},), x.mpf)
+ 
+ promote_rule(::Type{BigFloat}, ::Type{Float32}) = BigFloat
+ promote_rule(::Type{BigFloat}, ::Type{Float64}) = BigFloat
+@@ -78,7 +78,7 @@
+     @eval begin 
+         function ($fJ)(x::BigFloat, y::BigFloat)
+             z = BigFloat()
+-            ccall(($(string(:__gmpf_,fC)),:libgmp), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}), z.mpf, x.mpf, y.mpf)
++            ccall(($(string(:__gmpf_,fC)),"libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}), z.mpf, x.mpf, y.mpf)
+             return z
+         end
+     end
+@@ -86,19 +86,19 @@
+ 
+ function -(x::BigFloat)
+     z = BigFloat()
+-    ccall((:__gmpf_neg, :libgmp), Void, (Ptr{Void}, Ptr{Void}), z.mpf, x.mpf)
++    ccall((:__gmpf_neg, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}), z.mpf, x.mpf)
+     return z
+ end
+ 
+ function cmp(x::BigFloat, y::BigFloat)
+-    ccall((:__gmpf_cmp, :libgmp), Int32, (Ptr{Void}, Ptr{Void}), x.mpf, y.mpf)
++    ccall((:__gmpf_cmp, "libgmp.so.10"), Int32, (Ptr{Void}, Ptr{Void}), x.mpf, y.mpf)
+ end
+ 
+ for f in (:sqrt, :ceil, :floor, :trunc)
+     @eval begin
+         function ($f)(x::BigFloat)
+             z = BigFloat()
+-            ccall(($(string(:__gmpf_,f)), :libgmp), Void, (Ptr{Void}, Ptr{Void}), z.mpf, x.mpf)
++            ccall(($(string(:__gmpf_,f)), "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}), z.mpf, x.mpf)
+             return z
+         end
+     end
+@@ -106,7 +106,7 @@
+ 
+ function ^(x::BigFloat, y::Uint)
+     z = BigFloat()
+-    ccall((:__gmpf_pow_ui, :libgmp), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpf, x.mpf, y)
++    ccall((:__gmpf_pow_ui, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpf, x.mpf, y)
+     return z
+ end
+ 
+@@ -120,7 +120,7 @@
+     lng = 128
+     for i = 1:2
+         z = Array(Uint8, lng)
+-        lng = ccall((:__gmp_snprintf,:libgmp), Int32, (Ptr{Uint8}, Uint, Ptr{Uint8}, Ptr{Void}...), z, lng, "%.Fe", x.mpf)
++        lng = ccall((:__gmp_snprintf,"libgmp.so.10"), Int32, (Ptr{Uint8}, Uint, Ptr{Uint8}, Ptr{Void}...), z, lng, "%.Fe", x.mpf)
+         if lng < 128 || i == 2; return bytestring(convert(Ptr{Uint8}, z[1:lng])); end
+     end
+ end
+@@ -129,5 +129,5 @@
+ showcompact(io::IO, b::BigFloat) = print(io, string(b))
+ 
+ function BigFloat_clear(x::BigFloat)
+-    ccall((:__gmpf_clear, :libgmp), Void, (Ptr{Void},), x.mpf)
++    ccall((:__gmpf_clear, "libgmp.so.10"), Void, (Ptr{Void},), x.mpf)
+ end
+--- a/base/bigint.jl
++++ b/base/bigint.jl
+@@ -2,7 +2,7 @@
+     mpz::Vector{Int32}
+     function BigInt() 
+         z = Array(Int32, 4)
+-        ccall((:__gmpz_init,:libgmp), Void, (Ptr{Void},), z)
++        ccall((:__gmpz_init,"libgmp.so.10"), Void, (Ptr{Void},), z)
+         b = new(z)
+         finalizer(b, BigInt_clear)
+         return b
+@@ -11,14 +11,14 @@
+ 
+ function BigInt(x::String)
+     z = BigInt()
+-    err = ccall((:__gmpz_set_str, :libgmp), Int32, (Ptr{Void}, Ptr{Uint8}, Int32), z.mpz, bytestring(x), 0)
++    err = ccall((:__gmpz_set_str, "libgmp.so.10"), Int32, (Ptr{Void}, Ptr{Uint8}, Int32), z.mpz, bytestring(x), 0)
+     if err != 0; error("Invalid input"); end
+     return z
+ end
+ 
+ function BigInt(x::Int)
+     z = BigInt()
+-    ccall((:__gmpz_set_si, :libgmp), Void, (Ptr{Void}, Int), z.mpz, x)
++    ccall((:__gmpz_set_si, "libgmp.so.10"), Void, (Ptr{Void}, Int), z.mpz, x)
+     return z
+ end
+ BigInt{T<:Signed}(x::T) = BigInt(int(x))
+@@ -26,7 +26,7 @@
+ 
+ function BigInt(x::Uint)
+     z = BigInt()
+-    ccall((:__gmpz_set_ui, :libgmp), Void,
++    ccall((:__gmpz_set_ui, "libgmp.so.10"), Void,
+         (Ptr{Void}, Uint), z.mpz, x)
+     return z
+ end
+@@ -52,10 +52,10 @@
+ end
+ 
+ convert(::Type{Int}, n::BigInt) =
+-    ccall((:__gmpz_get_si, :libgmp), Int, (Ptr{Void},), n.mpz)
++    ccall((:__gmpz_get_si, "libgmp.so.10"), Int, (Ptr{Void},), n.mpz)
+ 
+ convert(::Type{Uint}, n::BigInt) =
+-    ccall((:__gmpz_get_ui, :libgmp), Uint, (Ptr{Void},), n.mpz)
++    ccall((:__gmpz_get_ui, "libgmp.so.10"), Uint, (Ptr{Void},), n.mpz)
+ 
+ promote_rule(::Type{BigInt}, ::Type{Int8}) = BigInt
+ promote_rule(::Type{BigInt}, ::Type{Int16}) = BigInt
+@@ -77,7 +77,7 @@
+     @eval begin
+         function ($fJ)(x::BigInt, y::BigInt)
+             z = BigInt()
+-            ccall(($(string(:__gmpz_,fC)), :libgmp), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}), z.mpz, x.mpz, y.mpz)
++            ccall(($(string(:__gmpz_,fC)), "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}), z.mpz, x.mpz, y.mpz)
+             return z
+         end
+     end
+@@ -88,7 +88,7 @@
+     @eval begin
+         function ($fJ)(x::BigInt)
+             z = BigInt()
+-            ccall(($(string(:__gmpz_,fC)), :libgmp), Void, (Ptr{Void}, Ptr{Void}), z.mpz, x.mpz)
++            ccall(($(string(:__gmpz_,fC)), "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}), z.mpz, x.mpz)
+             return z
+         end
+     end
+@@ -96,7 +96,7 @@
+ 
+ function <<(x::BigInt, c::Uint)
+     z = BigInt()
+-    ccall((:__gmpz_mul_2exp, :libgmp), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpz, x.mpz, c)
++    ccall((:__gmpz_mul_2exp, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpz, x.mpz, c)
+     return z
+ end
+ <<(x::BigInt, c::Int32)   = c<0 ? throw(DomainError()) : x<<uint(c)
+@@ -104,7 +104,7 @@
+ 
+ function >>(x::BigInt, c::Uint)
+     z = BigInt()
+-    ccall((:__gmpz_fdiv_q_2exp, :libgmp), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpz, x.mpz, c)
++    ccall((:__gmpz_fdiv_q_2exp, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpz, x.mpz, c)
+     return z
+ end
+ >>(x::BigInt, c::Int32)   = c<0 ? throw(DomainError()) : x>>uint(c)
+@@ -113,23 +113,23 @@
+ function divrem(x::BigInt, y::BigInt)
+     z1 = BigInt()
+     z2 = BigInt()
+-    ccall((:__gmpz_tdiv_qr, :libgmp), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}), z1.mpz, z2.mpz, x.mpz, y.mpz)
++    ccall((:__gmpz_tdiv_qr, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}), z1.mpz, z2.mpz, x.mpz, y.mpz)
+     z1, z2
+ end
+ 
+ function cmp(x::BigInt, y::BigInt)
+-    ccall((:__gmpz_cmp, :libgmp), Int32, (Ptr{Void}, Ptr{Void}), x.mpz, y.mpz)
++    ccall((:__gmpz_cmp, "libgmp.so.10"), Int32, (Ptr{Void}, Ptr{Void}), x.mpz, y.mpz)
+ end
+ 
+ function sqrt(x::BigInt)
+     z = BigInt()
+-    ccall((:__gmpz_sqrt, :libgmp), Void, (Ptr{Void}, Ptr{Void}), z.mpz, x.mpz)
++    ccall((:__gmpz_sqrt, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}), z.mpz, x.mpz)
+     return z
+ end
+ 
+ function ^(x::BigInt, y::Uint)
+     z = BigInt()
+-    ccall((:__gmpz_pow_ui, :libgmp), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpz, x.mpz, y)
++    ccall((:__gmpz_pow_ui, "libgmp.so.10"), Void, (Ptr{Void}, Ptr{Void}, Uint), z.mpz, x.mpz, y)
+     return z
+ end
+ 
+@@ -150,7 +150,7 @@
+     g = BigInt()
+     s = BigInt()
+     t = BigInt()
+-    ccall((:__gmpz_gcdext, :libgmp), Void,
++    ccall((:__gmpz_gcdext, "libgmp.so.10"), Void,
+         (Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}),
+         g, s, t, a.mpz, b.mpz)
+     BigInt(g), BigInt(s), BigInt(t)
+@@ -163,14 +163,14 @@
+         n = uint(bn)
+     end
+     z = BigInt()
+-    ccall((:__gmpz_fac_ui, :libgmp), Void,
++    ccall((:__gmpz_fac_ui, "libgmp.so.10"), Void,
+         (Ptr{Void}, Uint), z.mpz, n)
+     return z
+ end
+ 
+ function binomial(n::BigInt, k::Uint)
+     z = BigInt()
+-    ccall((:__gmpz_bin_ui, :libgmp), Void,
++    ccall((:__gmpz_bin_ui, "libgmp.so.10"), Void,
+         (Ptr{Void}, Ptr{Void}, Uint), z.mpz, n.mpz, k)
+     return z
+ end
+@@ -185,7 +185,7 @@
+ function string(x::BigInt)
+     lng = ndigits(x) + 2
+     z = Array(Uint8, lng)
+-    lng = ccall((:__gmp_snprintf,:libgmp), Int32, (Ptr{Uint8}, Uint, Ptr{Uint8}, Ptr{Void}...), z, lng, "%Zd", x.mpz)
++    lng = ccall((:__gmp_snprintf,"libgmp.so.10"), Int32, (Ptr{Uint8}, Uint, Ptr{Uint8}, Ptr{Void}...), z, lng, "%Zd", x.mpz)
+     return bytestring(convert(Ptr{Uint8}, z[1:lng]))
+ end
+ 
+@@ -194,7 +194,7 @@
+ end
+ 
+ function BigInt_clear(x::BigInt)
+-    ccall((:__gmpz_clear, :libgmp), Void, (Ptr{Void},), x.mpz)
++    ccall((:__gmpz_clear, "libgmp.so.10"), Void, (Ptr{Void},), x.mpz)
+ end
+ 
+-ndigits(x::BigInt) = ccall((:__gmpz_sizeinbase,:libgmp), Uint, (Ptr{Void}, Int32), x.mpz, 10)
++ndigits(x::BigInt) = ccall((:__gmpz_sizeinbase,"libgmp.so.10"), Uint, (Ptr{Void}, Int32), x.mpz, 10)

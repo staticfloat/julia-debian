@@ -1,0 +1,48 @@
+.de Vb \" (V)erbatim (b)egin.  Use fixed width font and no justification
+.ft CW
+.nf
+..
+.de Ve \" (V)erbatim (e)nd.  Return to regular font and justification
+.ft R
+.fi
+..
+.TH JULIA 1 "NOVEMBER 2012" Julia
+.SH NAME
+julia, julia-release-basic, julia-release-readline \- launch a Julia session
+.SH SYNOPSIS
+\fBjulia\fP [\fIoptions\fP]... [\fIprogram\fP] [\fIargs\fP]...
+.SH DESCRIPTION
+Julia is a high-level, high-performance dynamic programming language for
+technical computing, with syntax that is familiar to users of other technical
+computing environments. It provides a sophisticated compiler, distributed
+parallel execution, numerical accuracy, and an extensive mathematical function
+library. The library, mostly written in Julia itself, also integrates mature,
+best-of-breed C and Fortran libraries for linear algebra, random number
+generation, FFTs, and string processing. Julia programs are organized around
+defining functions, and overloading them for different combinations of argument
+types (which can also be user-defined).
+
+\fBjulia\fP launches an interactive Julia session with Readline capabilities.
+
+\fBjulia-release-readline\fP is an alias for \fBjulia\fP.
+
+\fBjulia-release-basic\fP launches an interactive Julia session without
+Readline capabilities.
+
+If a Julia source file is given as \fIprogram\fP (possibly with arguments in
+\fIargs\fP) then, instead of launching an interactive session, Julia executes
+the program and exits.
+
+.SH OPTIONS
+The complete set of command-line options for \fBjulia\fP is available by
+running the following command from the shell:
+.Vb
+
+    julia \-\-help
+.Ve
+.SH FILES
+.I ~/.juliarc.jl
+.RS
+Per user startup file.
+.SH AUTHOR
+Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors.

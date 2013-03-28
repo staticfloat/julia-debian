@@ -1,0 +1,54 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/default.mk
+
+COMMON_FLAGS = USE_SYSTEM_LLVM=1 USE_SYSTEM_LIGHTTPD=1 USE_SYSTEM_LIBUNWIND=1 \
+	USE_SYSTEM_READLINE=1 USE_SYSTEM_PCRE=1 USE_SYSTEM_BLAS=1 USE_SYSTEM_LAPACK=1 \
+	USE_SYSTEM_FFTW=1 USE_SYSTEM_GMP=1 USE_SYSTEM_ARPACK=1 USE_SYSTEM_SUITESPARSE=1 \
+	USE_SYSTEM_ZLIB=1 USE_LIB64=0 \
+	USE_QUIET=0 LLVM_CONFIG=/usr/bin/llvm-config-3.2 MULTIARCH_INSTALL=1
+
+# Openlibm does not compile on non-x86 archs
+ifeq (,$(findstring $(DEB_HOST_ARCH_CPU),i386 amd64))
+COMMON_FLAGS += USE_SYSTEM_LIBM=1
+endif
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_build-arch:
+	make $(COMMON_FLAGS) all
+
+override_dh_auto_test-arch:
+
+override_dh_auto_test-indep:
+
+override_dh_auto_clean:
+	make $(COMMON_FLAGS) cleanall
+	make -C deps $(COMMON_FLAGS) distclean
+	make -C doc cleanall
+	rm -rf usr
+
+override_dh_auto_install-arch:
+	make $(COMMON_FLAGS) PREFIX=debian/tmp/usr install
+	rm -rf usr # Otherwise dh_install does not see debian/tmp/usr
+
+override_dh_auto_install-indep:
+
+get-orig-source:
+	git clone https://github.com/JuliaLang/julia.git julia-$(DEB_VERSION_UPSTREAM)
+	# Checkout right commit and submodules, download and patch dSFMT,
+	# remove unneeded and non DFSG-free sources
+	cd julia-$(DEB_VERSION_UPSTREAM) && \
+		git checkout v`echo $(DEB_VERSION_UPSTREAM) | sed 's/\+dfsg\d*//'` && \
+		git rev-parse --short HEAD > .commitsha && \
+		git submodule update --init && \
+		make -C	deps configure-random && \
+		rm -rf deps/random/dsfmt-*.tar.gz \
+		       deps/openlibm/test/ieeetestnew.c \
+		       deps/openlibm/i387/osx_asm.h \
+		       deps/random/dsfmt-*/html/jquery.js \
+		       deps/nginx \
+		       ui/website/jquery.js
+	tar --exclude-vcs -caf julia_$(DEB_VERSION_UPSTREAM).orig.tar.xz julia-$(DEB_VERSION_UPSTREAM)
+	rm -rf julia-$(DEB_VERSION_UPSTREAM)

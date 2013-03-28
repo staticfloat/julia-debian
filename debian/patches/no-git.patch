@@ -1,0 +1,85 @@
+Description: Remove calls to git in build system / runtime
+ Also, create the COMMIT file before building the sys.ji image, otherwise it
+ will not be taken into account.
+Author: Sébastien Villemot <sebastien@debian.org>
+Forwarded: not-needed
+Last-Update: 2013-02-11
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/deps/Makefile
++++ b/deps/Makefile
+@@ -362,8 +362,6 @@
+ UV_OBJ_TARGET = $(BUILD)/lib/libuv.a
+ UV_OBJ_SOURCE = libuv/libuv.a
+ 
+-libuv/Makefile:
+-	(cd .. && git submodule init && git submodule update)
+ ifeq (exists, $(shell [ -d libuv/.git ] && echo exists ))
+ $(UV_OBJ_SOURCE): libuv/.git/HEAD
+ endif
+@@ -499,8 +497,6 @@
+ OPENLIBMEXT_OBJ_TARGET = $(BUILD)/lib/libopenlibm-extras.$(SHLIB_EXT)
+ OPENLIBMEXT_OBJ_SOURCE = openlibm/libopenlibm-extras.$(SHLIB_EXT)
+ 
+-openlibm/Makefile openlibm/Makefile.extras:
+-	(cd .. && git submodule init && git submodule update)
+ ifeq (exists, $(shell [ -d openlibm/.git ] && echo exists ))
+ $(OPENLIBM_OBJ_SOURCE): openlibm/.git/HEAD
+ $(OPENLIBMEXT_OBJ_SOURCE): openlibm/.git/HEAD
+@@ -593,8 +589,6 @@
+ 			   OS="$(OS)" ARCH="$(ARCH)" \
+ 			   USE_LIBRANDOM=1 LIBRANDOM_PATH="$(BUILD)/lib"
+ 
+-Rmath/Make.inc:
+-	(cd .. && git submodule init && git submodule update)
+ ifeq (exists, $(shell [ -d Rmath/.git ] && echo exists ))
+ $(RMATH_OBJ_SOURCE): Rmath/.git/HEAD
+ endif
+--- a/Make.inc
++++ b/Make.inc
+@@ -8,7 +8,7 @@
+ .SUFFIXES:
+ 
+ JULIA_VERSION = $(shell cat $(JULIAHOME)/VERSION)
+-JULIA_COMMIT = $(shell git rev-parse --short=10 HEAD)
++JULIA_COMMIT = $(shell cat $(JULIAHOME)/.commitsha)
+ 
+ LLVMROOT = $(BUILD)
+ BUILD = $(JULIAHOME)/usr
+--- a/Makefile
++++ b/Makefile
+@@ -20,8 +20,6 @@
+ 	$(MAKE) $(QUIET_MAKE) LD_LIBRARY_PATH=$(BUILD)/lib:$(LD_LIBRARY_PATH) JULIA_EXECUTABLE="$(JULIA_EXECUTABLE_$@)" $(BUILD)/$(JL_PRIVATE_LIBDIR)/sys.ji
+ 
+ julia-debug julia-release:
+-	@-git submodule init --quiet
+-	@-git submodule update
+ 	@$(MAKE) $(QUIET_MAKE) -C deps
+ 	@$(MAKE) $(QUIET_MAKE) -C src lib$@
+ 	@$(MAKE) $(QUIET_MAKE) -C base
+@@ -34,7 +32,7 @@
+ 
+ # use sys.ji if it exists, otherwise run two stages
+ $(BUILD)/$(JL_PRIVATE_LIBDIR)/sys.ji: VERSION base/*.jl base/pkg/*.jl $(BUILD)/share/julia/helpdb.jl
+-	@#echo `git rev-parse --short HEAD`-$(OS)-$(ARCH) \(`date +"%Y-%m-%d %H:%M:%S"`\) > COMMIT
++	@echo $(JULIA_COMMIT)-$(OS)-$(ARCH) \(`date +"%Y-%m-%d %H:%M:%S"`\) > COMMIT
+ 	$(QUIET_JULIA) cd base && \
+ 	(test -f $(BUILD)/$(JL_PRIVATE_LIBDIR)/sys.ji || $(JULIA_EXECUTABLE) -bf sysimg.jl) && $(JULIA_EXECUTABLE) -f sysimg.jl || echo "Note: this error is usually fixed by running 'make clean'. If the error persists, 'make cleanall' may help."
+ 
+@@ -96,7 +94,7 @@
+ endif
+ endif
+ 	cp $(JULIAHOME)/VERSION $(PREFIX)/share/julia/VERSION
+-	echo `git rev-parse --short HEAD`-$(OS)-$(ARCH) \(`date +"%Y-%m-%d %H:%M:%S"`\) > $(PREFIX)/share/julia/COMMIT
++	cp $(JULIAHOME)/COMMIT $(PREFIX)/share/julia/COMMIT
+ 
+ dist: 
+ 	rm -fr julia-*.tar.gz julia-$(JULIA_COMMIT)
+@@ -125,6 +123,7 @@
+ 	@rm -f julia
+ 	@rm -f *~ *# *.tar.gz
+ 	@rm -fr $(BUILD)/$(JL_PRIVATE_LIBDIR)
++	@rm -f COMMIT
+ 
+ cleanall: clean
+ 	@$(MAKE) -C src clean-flisp clean-support

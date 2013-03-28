@@ -1,0 +1,17 @@
+Description: Link against LLVM's shared libraries (and not static libraries)
+Author: Sébastien Villemot <sebastien@debian.org>
+Forwarded: not-needed
+Last-Update: 2012-11-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -15,7 +15,7 @@
+ 	-I$(shell $(LLVM_CONFIG) --includedir) \
+ 	-I$(JULIAHOME)/deps/libuv/include -I$(JULIAHOME)/usr/include
+ 
+-LIBS = $(WHOLE_ARCHIVE) $(JULIAHOME)/src/flisp/libflisp.a $(WHOLE_ARCHIVE) $(JULIAHOME)/src/support/libsupport.a -L$(BUILD)/lib $(BUILD)/lib/libuv.a $(shell $(LLVM_CONFIG) --libs) $(NO_WHOLE_ARCHIVE) $(shell $(LLVM_CONFIG) --ldflags) $(OSLIBS)
++LIBS = $(WHOLE_ARCHIVE) $(JULIAHOME)/src/flisp/libflisp.a $(WHOLE_ARCHIVE) $(JULIAHOME)/src/support/libsupport.a -L$(BUILD)/lib $(BUILD)/lib/libuv.a -lLLVM-3.2 $(NO_WHOLE_ARCHIVE) $(shell $(LLVM_CONFIG) --ldflags) $(OSLIBS)
+ 
+ ifneq ($(MAKECMDGOALS),debug)
+ TARGET =

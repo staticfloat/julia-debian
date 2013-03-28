@@ -1,0 +1,5 @@
+# Should not be used for downloading orig tarball, because the github download link
+# does not include submodules. Rather use `debian/rules get-orig-source'
+version=3
+opts=dversionmangle=s/\+dfsg\d*$// \
+https://github.com/JuliaLang/julia/tags .*/v(\d[\d\.]+)\.tar\.gz
