@@ -1,4 +1,4 @@
-julia (0.1.2.gitf456a28-1) precise; urgency=low
+julia (0.2.0.git) precise; urgency=low
 
   * nightly build
 
