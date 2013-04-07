@@ -5,7 +5,7 @@ Uploaders: Sébastien Villemot <sebastien@debian.org>, Elliot Saba <staticfloat@
 Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), dh-exec, llvm-3.2-dev,
  libdouble-conversion-dev, libsuitesparse-dev, gfortran,
  libgmp-dev, libreadline6-dev, libunwind7-dev | libunwind8-dev, libfftw3-dev, libpcre3-dev,
- libarpack2-dev, libncurses5-dev, librmath-dev, patchelf
+ libarpack2-dev, libncurses5-dev, librmath-dev, libopenlibm-dev, patchelf
 Build-Conflicts: libatlas3-base
 Standards-Version: 3.9.4
 Section: science
@@ -21,7 +21,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libopenblas-base | libblas3 | libatlas3-base,
  liblapack3 | libatlas3-base, libpcre3, libfftw3-3, libcholmod1.7.1,
- libumfpack5.4.0, libgmp10, zlib1g, libarpack2, librmath-dev
+ libumfpack5.4.0, libgmp10, zlib1g, libarpack2, libopenlibm-base, librmath-dev
 Recommends: git
 Suggests: ess (>= 12.09-1~)
 Description: high-performance programming language for technical computing
