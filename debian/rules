@@ -35,21 +35,3 @@ override_dh_auto_install-arch:
 	rm -rf usr # Otherwise dh_install does not see debian/tmp/usr
 
 override_dh_auto_install-indep:
-
-get-orig-source:
-	git clone https://github.com/JuliaLang/julia.git julia-$(DEB_VERSION_UPSTREAM)
-	# Checkout right commit and submodules, download and patch dSFMT,
-	# remove unneeded and non DFSG-free sources
-	cd julia-$(DEB_VERSION_UPSTREAM) && \
-		git checkout v`echo $(DEB_VERSION_UPSTREAM) | sed 's/\+dfsg\d*//'` && \
-		git rev-parse --short HEAD > .commitsha && \
-		git submodule update --init && \
-		make -C	deps configure-random && \
-		rm -rf deps/random/dsfmt-*.tar.gz \
-		       deps/openlibm/test/ieeetestnew.c \
-		       deps/openlibm/i387/osx_asm.h \
-		       deps/random/dsfmt-*/html/jquery.js \
-		       deps/nginx \
-		       ui/website/jquery.js
-	tar --exclude-vcs -caf julia_$(DEB_VERSION_UPSTREAM).orig.tar.xz julia-$(DEB_VERSION_UPSTREAM)
-	rm -rf julia-$(DEB_VERSION_UPSTREAM)
