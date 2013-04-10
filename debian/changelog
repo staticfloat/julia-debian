@@ -1,9 +1,3 @@
-julia (0.2.0.git) precise; urgency=low
-
-  * nightly build
-
- -- Elliot Saba <staticfloat@gmail.com>  Wed, 27 Mar 2013 21:28:46 -0700
-
 julia (0.1.2+dfsg-1) unstable; urgency=low
 
   * Imported Upstream version 0.1.2+dfsg.
