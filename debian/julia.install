@@ -5,7 +5,6 @@ usr/share/julia/VERSION
 usr/share/julia/COMMIT
 usr/share/julia/base
 usr/share/julia/helpdb.jl
-usr/share/julia/extras
 usr/bin/julia
 usr/bin/julia-release-basic
 usr/bin/julia-release-readline

@@ -33,11 +33,6 @@ License: GPL-3+
  License, version 3, can be found in the file
  `/usr/share/common-licenses/GPL-3'.
 
-Files: extras/json.jl
-       test/perf2/json.jl
-Copyright: 2011 François Glineur
-License: BSD-2-clause
-
 Files: doc/_themes/julia/localtoc.html
        doc/_themes/julia/searchbox.html
 Copyright: 2007-2011 The Sphinx team
