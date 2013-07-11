@@ -33,6 +33,5 @@ override_dh_auto_clean:
 override_dh_auto_install-arch:
 	make $(COMMON_FLAGS) PREFIX=debian/tmp/usr install
 	rm -rf usr # Otherwise dh_install does not see debian/tmp/usr
-	mv COMMIT.backup debian/tmp/usr/share/julia/COMMIT
 
 override_dh_auto_install-indep:
