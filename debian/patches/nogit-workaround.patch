@@ -1,6 +1,6 @@
 --- a/base/Makefile
 +++ b/base/Makefile
-@@ -3,30 +3,8 @@
+@@ -3,30 +3,7 @@
  
  PCRE_CONST = 0x[0-9a-fA-F]+|[-+]?\s*[0-9]+
  
@@ -25,23 +25,23 @@
 -endif
 -dirty = $(shell [ -z "$(shell git status --porcelain 2>/dev/null)" ] && echo "false" || echo "true" )
 -
- 
+-
 -
 -all: pcre_h.jl errno_h.jl build_h.jl.phony file_constants.jl uv_constants.jl
 +all: pcre_h.jl errno_h.jl build_h.jl file_constants.jl uv_constants.jl
  
  pcre_h.jl:
- 	$(QUIET_PERL) $(CPP) -dM $(shell $(PCRE_CONFIG) --prefix)/include/pcre.h | perl -nle '/^\s*#define\s+PCRE_(\w*)\s*\(?($(PCRE_CONST))\)?\s*$$/ and print "const $$1 = uint32($$2)"' | sort > $@
-@@ -40,7 +18,7 @@
+ 	@$(PRINT_PERL) $(CPP) -dM $(shell $(PCRE_CONFIG) --prefix)/include/pcre.h | perl -nle '/^\s*#define\s+PCRE_(\w*)\s*\(?($(PCRE_CONST))\)?\s*$$/ and print "const $$1 = uint32($$2)"' | sort > $@
+@@ -40,7 +17,7 @@
  uv_constants.jl: ../src/uv_constants.h
- 	$(QUIET_PERL) $(CPP) -P "-I$(LIBUV_INC)" -DJULIA ../src/uv_constants.h | tail -n 16 > $@
+ 	@$(PRINT_PERL) $(CPP) -P "-I$(LIBUV_INC)" -DJULIA ../src/uv_constants.h | tail -n 16 > $@
  
 -build_h.jl.phony:
 +build_h.jl:
- 	$(QUIET_PERL) $(CPP) -P build.h -I../src/support | grep . > $@
+ 	@$(CC) -E -P build.h -I../src/support | grep . > $@
  	@echo "const ARCH = :$(ARCH)" >> $@
  ifeq ($(OS),$(BUILD_OS))
-@@ -56,39 +34,9 @@
+@@ -56,40 +33,9 @@
  else
  	@echo "const USE_BLAS64 = false" >> $@
  endif
@@ -72,7 +72,8 @@
 -
 -	@# This to ensure that we always rebuild this file, but only when it is modified do we touch build_h.jl,
 -	@# ensuring we rebuild the system image as infrequently as possible
--	@if ! cmp -s build_h.jl $@; then \
+-	@if ! cmp -s $@ build_h.jl; then \
+-		$(PRINT_PERL) \
 -		mv $@ build_h.jl; \
 -	else \
 -		rm -f $@; \
