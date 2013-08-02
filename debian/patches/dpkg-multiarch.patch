@@ -7,9 +7,9 @@ Last-Update: 2012-12-18
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- a/Make.inc
 +++ b/Make.inc
-@@ -18,7 +18,7 @@
+@@ -22,7 +22,7 @@
  
- # If we're on debian, default to arch-dependent library dirs
+ # This used for debian packaging, to conform to library layout guidelines
  ifeq ($(MULTIARCH_INSTALL), 1)
 -MULTIARCH = $(shell gcc -print-multiarch)
 +MULTIARCH = $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
