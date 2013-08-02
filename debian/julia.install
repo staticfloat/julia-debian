@@ -1,8 +1,6 @@
 #!/usr/bin/dh-exec
 
 usr/lib/${DEB_HOST_MULTIARCH}/julia
-usr/share/julia/VERSION
-usr/share/julia/COMMIT
 usr/share/julia/base
 usr/share/julia/helpdb.jl
 usr/bin/julia
