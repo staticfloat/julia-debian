@@ -1,2 +1,2 @@
 dpkg-multiarch.patch
-#nogit-workaround.patch
+nogit.patch
