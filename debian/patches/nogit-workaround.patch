@@ -31,10 +31,10 @@
 +all: pcre_h.jl errno_h.jl build_h.jl file_constants.jl uv_constants.jl
  
  pcre_h.jl:
- 	@$(PRINT_PERL) $(CPP) -dM $(shell $(PCRE_CONFIG) --prefix)/include/pcre.h | perl -nle '/^\s*#define\s+PCRE_(\w*)\s*\(?($(PCRE_CONST))\)?\s*$$/ and print "const $$1 = uint32($$2)"' | sort > $@
+ 	@$(call PRINT_PERL, $(CPP) -dM $(shell $(PCRE_CONFIG) --prefix)/include/pcre.h | perl -nle '/^\s*#define\s+PCRE_(\w*)\s*\(?($(PCRE_CONST))\)?\s*$$/ and print "const $$1 = uint32($$2)"' | sort > $@)
 @@ -40,7 +17,7 @@
  uv_constants.jl: ../src/uv_constants.h
- 	@$(PRINT_PERL) $(CPP) -P "-I$(LIBUV_INC)" -DJULIA ../src/uv_constants.h | tail -n 16 > $@
+ 	@$(call PRINT_PERL, $(CPP) -P "-I$(LIBUV_INC)" -DJULIA ../src/uv_constants.h | tail -n 16 > $@)
  
 -build_h.jl.phony:
 +build_h.jl:
@@ -73,7 +73,7 @@
 -	@# This to ensure that we always rebuild this file, but only when it is modified do we touch build_h.jl,
 -	@# ensuring we rebuild the system image as infrequently as possible
 -	@if ! cmp -s $@ build_h.jl; then \
--		$(PRINT_PERL) \
+-		$(call PRINT_PERL,) \
 -		mv $@ build_h.jl; \
 -	else \
 -		rm -f $@; \
