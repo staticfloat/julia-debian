@@ -3,7 +3,7 @@ Priority: extra
 Maintainer: Debian Julia Team <pkg-julia-devel@lists.alioth.debian.org>
 Uploaders: Sébastien Villemot <sebastien@debian.org>, Elliot Saba <staticfloat@gmail.com>
 Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), dh-exec, llvm-3.3-dev,
- libdouble-conversion-dev, libsuitesparse-dev, gfortran, libmpfr-dev,
+ libdouble-conversion-dev, libsuitesparse-dev, gfortran, libmpfr-dev, zlib1g,
  libgmp-dev, libreadline6-dev, libunwind7-dev | libunwind8-dev, libfftw3-dev, libpcre3-dev,
  libarpack2-dev, libncurses5-dev, librmath-dev, libopenlibm-dev, patchelf, libuv-julia-dev
 Build-Conflicts: libatlas3-base
