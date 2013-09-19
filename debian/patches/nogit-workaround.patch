@@ -27,12 +27,12 @@
 -
 -
 -
--all: pcre_h.jl errno_h.jl build_h.jl.phony file_constants.jl uv_constants.jl
-+all: pcre_h.jl errno_h.jl build_h.jl file_constants.jl uv_constants.jl
+-all: pcre_h.jl errno_h.jl build_h.jl.phony fenv_constants.jl file_constants.jl uv_constants.jl
++all: pcre_h.jl errno_h.jl build_h.jl fenv_constants.jl file_constants.jl uv_constants.jl
  
  pcre_h.jl:
  	@$(call PRINT_PERL, $(CPP) -dM $(shell $(PCRE_CONFIG) --prefix)/include/pcre.h | perl -nle '/^\s*#define\s+PCRE_(\w*)\s*\(?($(PCRE_CONST))\)?\s*$$/ and print "const $$1 = uint32($$2)"' | sort > $@)
-@@ -40,7 +17,7 @@
+@@ -43,7 +20,7 @@
  uv_constants.jl: ../src/uv_constants.h
  	@$(call PRINT_PERL, $(CPP) -P "-I$(LIBUV_INC)" -DJULIA ../src/uv_constants.h | tail -n 16 > $@)
  
@@ -41,7 +41,7 @@
  	@$(CC) -E -P build.h -I../src/support | grep . > $@
  	@echo "const ARCH = :$(ARCH)" >> $@
  ifeq ($(OS),$(BUILD_OS))
-@@ -56,40 +33,9 @@
+@@ -59,40 +36,9 @@
  else
  	@echo "const USE_BLAS64 = false" >> $@
  endif
