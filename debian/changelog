@@ -1,4 +1,4 @@
-julia (0.2.0) unstable; urgency=low
+julia (0.2.0-pre) unstable; urgency=low
 
   * Bump to compatibility with version 0.2.0.  This version capable of being used with launchpad's nightly build system
 

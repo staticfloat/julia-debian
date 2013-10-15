@@ -8,7 +8,6 @@ Full documentation and examples are available in the julia-doc package.
 An Emacs mode for editing Julia source files and managing interactive sessions
 is available in the ess package.
 
-The web interface is not packaged for the time being, because it is still
-experimental and can potentially create important security issues.
-
+A new web interface integrated with the ipython notebook  is available via
+the IJulia package. See https://github.com/JuliaLang/IJulia.jl for details
  -- Sébastien Villemot <sebastien@debian.org>, Thu,  7 Mar 2013 11:47:59 +0100

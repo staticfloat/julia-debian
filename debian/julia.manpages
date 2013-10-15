@@ -1,3 +1,3 @@
 debian/julia.1
-debian/julia-release-basic.1
-debian/julia-release-readline.1
+debian/julia-basic.1
+debian/julia-readline.1
