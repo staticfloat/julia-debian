@@ -32,10 +32,8 @@ override_dh_auto_clean:
 	rm -rf usr
 
 override_dh_auto_install-arch:
-	make $(COMMON_FLAGS) prefix=debian/tmp/usr install
+	make $(COMMON_FLAGS) prefix=$(abspath debian/tmp/usr) install
 	# Otherwise dh_install does not see debian/tmp/usr
 	rm -rf usr
-	# Remove sys.so as it is non-redistributable right now
-	rm -f debian/tmp/usr/lib/${DEB_HOST_MULTIARCH}/julia/sys.so
 
 override_dh_auto_install-indep:
