@@ -5,6 +5,4 @@ usr/share/julia/base
 usr/share/julia/helpdb.jl
 usr/share/julia/test/*.jl
 usr/bin/julia
-usr/bin/julia-basic
-usr/bin/julia-readline
 usr/include/julia
