@@ -29,10 +29,14 @@ override_dh_strip:
 	dh_strip -Xjulia
 
 override_dh_auto_clean:
+	# if we already have a version_git.jl, back that up
+	-cp base/version_git.jl base/version_git.jl.backup
 	make $(COMMON_FLAGS) cleanall
 	make -C deps $(COMMON_FLAGS) cleanall
 	make -C doc cleanall
 	rm -rf usr
+	# Now copy it back
+	-cp base/version_git.jl.backup base/version_git.jl
 
 override_dh_auto_install-arch:
 	make $(COMMON_FLAGS) prefix=$(abspath debian/tmp/usr) install
