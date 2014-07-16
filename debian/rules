@@ -21,6 +21,9 @@ endif
 override_dh_auto_build-arch:
 	make $(COMMON_FLAGS) all
 
+override_dh_auto_build-indep:
+	make -C doc html
+
 override_dh_auto_test-arch:
 
 override_dh_auto_test-indep:

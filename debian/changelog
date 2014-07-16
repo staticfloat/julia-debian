@@ -1,3 +1,10 @@
+julia (0.3.0-rc1) unstable; urgency=low
+
+  * Compatible with 0.3.0-rc1
+  * Introduce julia-doc target, lovingly ripped from Sébastien Villemot's debian package, https://packages.debian.org/sid/julia-doc
+
+ -- Elliot Saba <staticfloat@gmail.com>  Thu, 27 Jun 2013 23:25:50 -0700
+
 julia (0.2.0-pre) unstable; urgency=low
 
   * Bump to compatibility with version 0.2.0.  This version capable of being used with launchpad's nightly build system
