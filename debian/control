@@ -25,7 +25,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  libumfpack5.4.0, libgmp10, zlib1g, libarpack2, librmath-julia-dev,
  libmpfr4
 Recommends: git
-Suggests: ess (>= 12.09-1~)
+Suggests: ess (>= 12.09-1~), julia-doc
 Description: high-performance programming language for technical computing
  Julia is a high-level, high-performance dynamic programming language for
  technical computing, with syntax that is familiar to users of other technical
