@@ -36,7 +36,7 @@ override_dh_auto_clean:
 	# if we already have a version_git.jl, back that up
 	-cp base/version_git.jl base/version_git.jl.backup
 	make $(COMMON_FLAGS) cleanall
-	make -C deps $(COMMON_FLAGS) cleanall
+	make -C deps $(COMMON_FLAGS) distcleanall
 	make -C doc cleanall
 	rm -rf usr
 	# Now copy it back
