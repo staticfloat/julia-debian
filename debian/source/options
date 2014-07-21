@@ -1,0 +1,2 @@
+# Ignore changes made to any version_git.jl* files
+extend-diff-ignore = "(^|/)base/version_git\.jl.*"
