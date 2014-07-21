@@ -1,5 +1,6 @@
-julia (0.3.0-rc1-1) unstable; urgency=low
+julia (0.3.0~pre) unstable; urgency=low
 
+  * Properly version now!  (sigh)
   * Compatible with 0.3.0-rc1
   * Introduce julia-doc target, lovingly ripped from Sébastien Villemot's debian package, https://packages.debian.org/sid/julia-doc
 
