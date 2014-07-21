@@ -22,7 +22,6 @@ override_dh_auto_build-arch:
 	make $(COMMON_FLAGS) all
 
 override_dh_auto_build-indep:
-	pip install sphinx_rtd_theme
 	make -C doc html
 
 override_dh_auto_test-arch:
