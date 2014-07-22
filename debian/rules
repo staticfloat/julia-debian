@@ -25,6 +25,7 @@ override_dh_auto_build-indep:
 	make -C doc html
 
 override_dh_auto_test-arch:
+	make $(COMMON_FLAGS) testall
 
 override_dh_auto_test-indep:
 
