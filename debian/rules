@@ -38,6 +38,8 @@ override_dh_auto_clean:
 	make -C deps $(COMMON_FLAGS) distcleanall
 	make -C doc cleanall
 	rm -rf usr
+	# Clean out .gitignore files
+	find . -name .gitignore | xargs rm
 	# Now copy it back
 	-cp base/version_git.jl.backup base/version_git.jl
 
