@@ -21,14 +21,10 @@ endif
 
 override_dh_auto_build-arch:
 	make $(COMMON_FLAGS)
-
-override_dh_auto_build-indep:
 	make -C doc html
 
 override_dh_auto_test-arch:
 	make $(COMMON_FLAGS) testall
-
-override_dh_auto_test-indep:
 
 override_dh_strip:
 	dh_strip -Xjulia
@@ -50,6 +46,3 @@ override_dh_auto_install-arch:
 	make $(COMMON_FLAGS) install
 	# Otherwise dh_install does not see debian/tmp/usr
 	rm -rf usr
-
-
-override_dh_auto_install-indep:
