@@ -1,0 +1,13 @@
+diff --git a/src/codegen.cpp b/src/codegen.cpp
+index 88511f1..2713765 100644
+--- a/src/codegen.cpp
++++ b/src/codegen.cpp
+@@ -3965,7 +3965,7 @@ extern "C" DLLEXPORT jl_value_t *jl_new_box(jl_value_t *v)
+ }
+ 
+ #if LLVM_VERSION_MAJOR == 3 && LLVM_VERSION_MINOR == 3 && SYSTEM_LLVM
+-#define INSTCOMBINE_BUG
++//#define INSTCOMBINE_BUG
+ #endif
+ 
+ static void init_julia_llvm_env(Module *m)
