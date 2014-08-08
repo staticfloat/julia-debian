@@ -2,13 +2,12 @@
 
 include /usr/share/dpkg/default.mk
 
-COMMON_FLAGS = VERBOSE=1 USE_SYSTEM_LLVM=1 USE_SYSTEM_LIBUNWIND=1 \
+COMMON_FLAGS = VERBOSE=1 USE_SYSTEM_LIBUNWIND=1 \
 	USE_SYSTEM_PCRE=1 USE_SYSTEM_BLAS=1 USE_SYSTEM_LAPACK=1 \
 	USE_SYSTEM_FFTW=1 USE_SYSTEM_GRISU=1 USE_SYSTEM_GMP=1 USE_SYSTEM_ARPACK=1 \
 	USE_SYSTEM_SUITESPARSE=1 USE_SYSTEM_RMATH=1 USE_SYSTEM_MPFR=1 NO_GIT=1 \
         USE_BLAS64=0 LIBBLASNAME=libblas.so.3 LIBLAPACKNAME=liblapack.so.3 \
-	LLVM_CONFIG=/usr/bin/llvm-config-3.3 LLVM_LLC=llc-3.3 MULTIARCH_INSTALL=1 \
-	JULIA_CPU_TARGET=core2 prefix=$(abspath debian/tmp/usr) \
+	MULTIARCH_INSTALL=1 JULIA_CPU_TARGET=core2 prefix=$(abspath debian/tmp/usr) \
 	TAGGED_RELEASE_BANNER="Official http://julialang.org release"
 
 # Openlibm does not compile on non-x86 archs
