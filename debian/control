@@ -20,7 +20,7 @@ Pre-Depends: ${misc:Pre-Depends}
 # Julia scripts, and therefore dpkg-shlibdeps cannot detect them
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libopenblas-base, liblapack3 | libatlas3-base, libpcre3 (>= 8.31), libfftw3-3,
- libcholmod1.7.1, libumfpack5.4.0, libgmp10, zlib1g, libarpack2,
+ libcholmod1.7.1 | libcholmod2.1.2, libumfpack5.4.0 | libumfpack5.6.2, libgmp10, zlib1g, libarpack2,
  librmath-julia-dev, libmpfr4
 Recommends: git
 Suggests: ess (>= 12.09-1~), julia-doc
