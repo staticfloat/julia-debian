@@ -19,10 +19,9 @@ Pre-Depends: ${misc:Pre-Depends}
 # NB: several shared libs have to be hardcoded because they are dlopen'd from
 # Julia scripts, and therefore dpkg-shlibdeps cannot detect them
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libopenblas-base | libblas3 | libatlas3-base,
- liblapack3 | libatlas3-base, libpcre3 (>= 8.31), libfftw3-3, libcholmod1.7.1,
- libumfpack5.4.0, libgmp10, zlib1g, libarpack2, librmath-julia-dev,
- libmpfr4
+ libopenblas-base, liblapack3 | libatlas3-base, libpcre3 (>= 8.31), libfftw3-3,
+ libcholmod1.7.1, libumfpack5.4.0, libgmp10, zlib1g, libarpack2,
+ librmath-julia-dev, libmpfr4
 Recommends: git
 Suggests: ess (>= 12.09-1~), julia-doc
 Description: high-performance programming language for technical computing
