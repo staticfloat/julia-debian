@@ -41,7 +41,7 @@ Description: high-performance programming language for technical computing
 Package: julia-doc
 Architecture: all
 Section: doc
-Depends: ${misc:Depends}, libjs-jquery, libjs-underscore, python-sphinx-rtd-theme
+Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
 Suggests: julia
 Description: high-performance programming language for technical computing (documentation)
  Julia is a high-level, high-performance dynamic programming language for
