@@ -11,7 +11,7 @@ COMMON_FLAGS = VERBOSE=1 USE_SYSTEM_LIBUNWIND=1 \
 	TAGGED_RELEASE_BANNER="Official http://julialang.org release"
 
 ifeq ($(DEB_HOST_ARCH_CPU),i386)
-COMMON_FLAGS += MARCH=pentium4
+COMMON_FLAGS += MARCH=i686
 endif
 
 ifeq ($(DEB_HOST_ARCH_CPU),amd64)
