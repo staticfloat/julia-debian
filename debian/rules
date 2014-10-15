@@ -29,7 +29,6 @@ endif
 
 override_dh_auto_build-arch:
 	make $(COMMON_FLAGS)
-	make $(COMMON_FLAGS) -C doc html
 
 override_dh_auto_test-arch:
 	make $(COMMON_FLAGS) testall
