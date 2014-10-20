@@ -44,7 +44,6 @@ override_dh_auto_clean:
 	make $(COMMON_FLAGS) cleanall
 	# Don't distcleanall right now, because we want to keep tarballs and such that we've saved
 	make -C deps $(COMMON_FLAGS) cleanall
-	make -C doc cleanall
 	rm -f deps/libuv/config.log
 	rm -rf usr
 	# Clean out .gitignore files
