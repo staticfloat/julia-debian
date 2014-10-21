@@ -29,6 +29,7 @@ endif
 
 override_dh_auto_build-arch:
 	make $(COMMON_FLAGS)
+	make $(COMMON_FLAGS) usr/share/doc/julia/helpdb.jl
 
 override_dh_auto_test-arch:
 	make $(COMMON_FLAGS) testall
