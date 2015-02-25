@@ -53,6 +53,9 @@ override_dh_auto_clean:
 	-cp base/version_git.jl.backup base/version_git.jl
 
 override_dh_auto_install-arch:
+	# Make sure this directory's timestamp is recent
+	touch doc/_build/html
+
 	make $(COMMON_FLAGS) install
 	# Otherwise dh_install does not see debian/tmp/usr
 	rm -rf usr
