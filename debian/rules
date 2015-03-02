@@ -40,22 +40,21 @@ override_dh_strip:
 	strip debian/julia/usr/lib/$$(dpkg-architecture -qDEB_HOST_MULTIARCH)/julia/libjulia*.so
 
 override_dh_auto_clean:
-	# if we already have a version_git.jl, back that up
+	# if we already have a version_git.jl, back that up, same with doc/_build
 	-cp base/version_git.jl base/version_git.jl.backup
+	-mv doc/_build doc/_build.backup
 	make $(COMMON_FLAGS) cleanall
-	# Don't distcleanall right now, because we want to keep tarballs and such that we've saved
+	# Don't distcleanall because we want to keep tarballs and such that we've saved
 	make -C deps $(COMMON_FLAGS) cleanall
 	rm -f deps/libuv/config.log
 	rm -rf usr
 	# Clean out .gitignore files
 	find . -name .gitignore | xargs -r rm
-	# Now copy it back
+	# Now the previous files back
 	-cp base/version_git.jl.backup base/version_git.jl
+	-mv doc/_build.backup doc/_build
 
 override_dh_auto_install-arch:
-	# Make sure this directory's timestamp is recent
-	touch doc/_build/html
-
 	make $(COMMON_FLAGS) install
 	# Otherwise dh_install does not see debian/tmp/usr
 	rm -rf usr
