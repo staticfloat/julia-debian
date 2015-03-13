@@ -3,9 +3,9 @@ Priority: extra
 Maintainer: Debian Julia Team <pkg-julia-devel@lists.alioth.debian.org>
 Uploaders: Sébastien Villemot <sebastien@debian.org>, Elliot Saba <staticfloat@gmail.com>
 Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), dh-exec,
- libdouble-conversion-dev, libsuitesparse-dev, libopenblas-dev, gfortran, libmpfr-dev, zlib1g-dev,
+ libdouble-conversion-dev, libopenblas-dev, gfortran, libmpfr-dev, zlib1g-dev,
  libgmp-dev (>= 5.1.3), libunwind7-dev | libunwind8-dev, libfftw3-dev, libpcre3-dev (>= 8.31),
- libarpack2-dev, librmath-julia-dev, patchelf, curl, python-sphinx, python-sphinx-rtd-theme, cmake
+ libarpack2-dev, librmath-julia-dev, patchelf [!armhf], curl, python-sphinx, python-sphinx-rtd-theme, cmake
 Build-Conflicts: libatlas3-base
 Standards-Version: 3.9.4
 Section: science
