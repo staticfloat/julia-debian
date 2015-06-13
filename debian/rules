@@ -4,9 +4,7 @@ include /usr/share/dpkg/default.mk
 
 COMMON_FLAGS = VERBOSE=1 MULTIARCH_INSTALL=1 prefix=$(abspath debian/tmp/usr) \
 	TAGGED_RELEASE_BANNER="Official http://julialang.org release" \
-	NO_GIT=1 USE_BLAS64=0 \
-	USE_SYSTEM_PCRE=1 USE_SYSTEM_MPFR=1 USE_SYSTEM_GMP=1 \
-	USE_SYSTEM_FFTW=1
+	NO_GIT=1 USE_BLAS64=0 USE_SYSTEM_MPFR=1 USE_SYSTEM_GMP=1 USE_SYSTEM_FFTW=1
 	
 # ARM doesn't have openblas or grisu packaged, so if we're on i386 or amd64, add those in
 ifeq ($(DEB_HOST_ARCH_CPU),i386)
