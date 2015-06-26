@@ -2,7 +2,8 @@
 
 usr/lib/${DEB_HOST_MULTIARCH}/julia
 usr/share/julia/base
+usr/share/julia/*.jl
+usr/share/julia/test
 usr/share/doc/julia/helpdb.jl
-usr/share/julia/test/
 usr/bin/julia
 usr/include/julia
