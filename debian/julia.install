@@ -6,3 +6,8 @@ usr/share/julia/*.jl
 usr/share/julia/test
 usr/bin/julia
 usr/include/julia
+etc/julia/
+usr/share/icons/hicolor/scalable/apps/julia.svg
+usr/share/applications/julia.desktop
+usr/share/appdata/julia.appdata.xml
+
