@@ -35,7 +35,7 @@ override_dh_auto_test-arch:
 override_dh_strip:
 	dh_strip -Xjulia
 	# explicitly strip libjulia*
-	strip debian/julia/usr/lib/$$(dpkg-architecture -qDEB_HOST_MULTIARCH)/julia/libjulia*.so
+	strip debian/julia/usr/lib/$$(dpkg-architecture -qDEB_HOST_MULTIARCH)/libjulia*.so
 
 override_dh_auto_clean:
 	# if we already have a version_git.jl, back that up, same with doc/_build
