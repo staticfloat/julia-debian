@@ -3,7 +3,6 @@
 include /usr/share/dpkg/default.mk
 
 COMMON_FLAGS = VERBOSE=1 MULTIARCH_INSTALL=1 prefix=$(abspath debian/tmp/usr) \
-	TAGGED_RELEASE_BANNER="Official http://julialang.org release" \
 	NO_GIT=1 USE_BLAS64=0 USE_SYSTEM_MPFR=1 USE_SYSTEM_GMP=1 USE_SYSTEM_FFTW=1
 	
 # Set platform-specific flags
