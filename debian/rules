@@ -27,7 +27,7 @@ endif
 	dh $@ --parallel
 
 override_dh_auto_build-arch:
-	make $(COMMON_FLAGS)
+	make -j3 $(COMMON_FLAGS)
 
 override_dh_auto_test-arch:
 	make $(COMMON_FLAGS) testall
