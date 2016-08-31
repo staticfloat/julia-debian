@@ -53,8 +53,6 @@ override_dh_auto_clean:
 
 override_dh_auto_install-arch:
 	make $(COMMON_FLAGS) install
-	# Otherwise dh_install does not see debian/tmp/usr
-	rm -rf usr
 
 override_dh_auto_install-indep:
 
