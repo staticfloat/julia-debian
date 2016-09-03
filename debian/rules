@@ -2,7 +2,7 @@
 
 include /usr/share/dpkg/default.mk
 
-COMMON_FLAGS = prefix=debuild_usr VERBOSE=1 MULTIARCH_INSTALL=1 NO_GIT=1 USE_BLAS64=0 \
+COMMON_FLAGS = prefix=debuild_prefix VERBOSE=1 MULTIARCH_INSTALL=1 NO_GIT=1 USE_BLAS64=0 \
 	USE_SYSTEM_MPFR=1 USE_SYSTEM_GMP=1 USE_SYSTEM_FFTW=1 USE_SYSTEM_CURL=1
 	
 # Set platform-specific flags
@@ -34,7 +34,7 @@ override_dh_auto_test-arch:
 override_dh_strip:
 	dh_strip -Xjulia
 	# explicitly strip libjulia*
-	strip $$DESTDIR/debuild_usr/lib/$$(dpkg-architecture -qDEB_HOST_MULTIARCH)/libjulia*.so
+	strip $$DESTDIR/debuild_prefix/lib/$$(dpkg-architecture -qDEB_HOST_MULTIARCH)/libjulia*.so
 
 override_dh_auto_clean:
 	# if we already have a version_git.jl, back that up, same with doc/_build
