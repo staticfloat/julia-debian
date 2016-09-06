@@ -1,12 +1,13 @@
 #!/usr/bin/dh-exec
 
-debuild_prefix/lib/${DEB_HOST_MULTIARCH}/julia
-debuild_prefix/share/julia/base
-debuild_prefix/share/julia/test
-debuild_prefix/bin/julia
-debuild_prefix/include/julia
-debuild_prefix/etc/julia/
-debuild_prefix/share/icons/hicolor/scalable/apps/julia.svg
-debuild_prefix/share/applications/julia.desktop
-debuild_prefix/share/appdata/julia.appdata.xml
+lib/${DEB_HOST_MULTIARCH}/julia
+lib/${DEB_HOST_MULTIARCH}
+share/julia/base
+share/julia/test
+bin/julia
+include/julia
+etc/julia/
+share/icons/hicolor/scalable/apps/julia.svg
+share/applications/julia.desktop
+share/appdata/julia.appdata.xml
 
