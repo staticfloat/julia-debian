@@ -1,3 +1,39 @@
+julia (0.5.0-trusty1) trusty; urgency=medium
+
+  * Release of Julia v0.5.0
+
+ -- Elliot Saba <staticfloat@gmail.com>  Tue, 20 Sep 2016 09:57:28 -0700
+
+julia (0.4.6-precise1) precise; urgency=medium
+
+  * Release of Julia v0.4.6
+
+ -- Elliot Saba <staticfloat@gmail.com>  Thu, 23 Jun 2016 23:20:35 -0700
+
+julia (0.4.5-precise1) precise; urgency=medium
+
+  * Release of Julia v0.4.5
+
+ -- Elliot Saba <staticfloat@gmail.com>  Wed, 06 Apr 2016 16:21:57 -0700
+
+julia (0.4.2-precise2) precise; urgency=medium
+
+  * Release of Julia v0.4.2
+
+ -- Elliot Saba <staticfloat@gmail.com>  Thu, 10 Dec 2015 17:00:10 -0800
+
+julia (0.4.1-precise1) precise; urgency=medium
+
+  * Release of Julia v0.4.1
+
+ -- Elliot Saba <staticfloat@gmail.com>  Thu, 12 Nov 2015 12:00:51 -0800
+
+julia (0.4.0-precise3) precise; urgency=medium
+
+  * Install .desktop and other etc/share files
+
+ -- Elliot Saba <staticfloat@gmail.com>  Mon, 12 Oct 2015 12:10:35 -0700
+
 julia (0.3.0~pre) unstable; urgency=low
 
   * Properly version now!  (sigh)
