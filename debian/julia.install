@@ -1,13 +1,12 @@
 #!/usr/bin/dh-exec
 
-usr/lib/${DEB_HOST_MULTIARCH}/julia
-usr/lib/${DEB_HOST_MULTIARCH}
-usr/share/julia/base
-usr/share/julia/test
-usr/bin/julia
-usr/include/julia
-usr/etc/julia/
-usr/share/icons/hicolor/scalable/apps/julia.svg
-usr/share/applications/julia.desktop
-usr/share/appdata/julia.appdata.xml
-
+debian/tmp/usr/lib/${DEB_HOST_MULTIARCH}/julia
+debian/tmp/usr/lib/${DEB_HOST_MULTIARCH}
+debian/tmp/usr/share/julia/base
+debian/tmp/usr/share/julia/test
+debian/tmp/usr/bin/julia
+debian/tmp/usr/include/julia
+debian/tmp/usr/etc/julia/
+debian/tmp/usr/share/icons/hicolor/scalable/apps/julia.svg
+debian/tmp/usr/share/applications/julia.desktop
+debian/tmp/usr/share/appdata/julia.appdata.xml
