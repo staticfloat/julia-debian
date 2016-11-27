@@ -21,7 +21,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libopenblas-base, liblapack3 | libatlas3-base, libfftw3-3,
  libcholmod1.7.1 | libcholmod2.1.2 | libcholmod3.0.6 | libcholmod3, libumfpack5.4.0 | libumfpack5.6.2 | libumfpack5.7.1 | libumfpack5, libgmp10 (>= 6.1.0), zlib1g, libarpack2 [!armhf],
- librmath-julia-dev, libmpfr4, git, libssl1.0.0
+ librmath-julia-dev, libmpfr4, git, libssl1.0.0 | libssl1.0.2
 Suggests: ess (>= 12.09-1~), julia-doc
 Description: high-performance programming language for technical computing
  Julia is a high-level, high-performance dynamic programming language for
