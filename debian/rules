@@ -2,68 +2,49 @@
 
 include /usr/share/dpkg/default.mk
 
-COMMON_FLAGS = prefix=debian/tmp/usr VERBOSE=1 MULTIARCH_INSTALL=1 NO_GIT=1 USE_BLAS64=0 \
-	TAGGED_RELEASE_BANNER="Ubuntu ppa:staticfloat/juliareleases build" \
-	USE_SYSTEM_MPFR=1 USE_SYSTEM_GMP=1 USE_SYSTEM_FFTW=1 USE_SYSTEM_CURL=1
-	
 # Set platform-specific flags
 ifeq ($(DEB_HOST_ARCH_CPU),i386)
-COMMON_FLAGS += MARCH=pentium4
-COMMON_FLAGS += USE_SYSTEM_BLAS=1 USE_SYSTEM_LAPACK=1 USE_SYSTEM_ARPACK=1
-COMMON_FLAGS += LIBBLASNAME=libopenblas.so.0 LIBLAPACKNAME=liblapack.so.3
+TAR_ARCH=i686
 endif
 
 ifeq ($(DEB_HOST_ARCH_CPU),amd64)
-COMMON_FLAGS += MARCH=x86-64
-COMMON_FLAGS += USE_SYSTEM_BLAS=1 USE_SYSTEM_LAPACK=1 USE_SYSTEM_ARPACK=1
-COMMON_FLAGS += LIBBLASNAME=libopenblas.so.0 LIBLAPACKNAME=liblapack.so.3
+TAR_ARCH=x86_64
 endif
 
-ifeq (,$(findstring $(DEB_HOST_ARCH_CPU),i386 amd64))
-COMMON_FLAGS += USE_SYSTEM_LIBM=1 LLVM_USE_CMAKE=1
+ifeq ($(DEB_HOST_ARCH_CPU),armhf)
+TAR_ARCH=arm
+endif
+
+ifeq ($(DEB_HOST_ARCH_CPU),ppc64le)
+TAR_ARCH=ppc64le
 endif
 
 %:
-	dh $@ --parallel
+	dh $@
+
+override_dh_auto_install:
 
 override_dh_auto_build-arch:
-	make -j3 $(COMMON_FLAGS)
+	mkdir -p usr
+	(cd usr; tar --strip-components=1 -zxvf ../julia-*-linux-$(TAR_ARCH).tar.gz)
 
-override_dh_auto_test-arch:
-	make $(COMMON_FLAGS) testall
+override_dh_auto_clean:
+	rm -rf usr
 
 override_dh_strip:
 	dh_strip -Xjulia
 	# explicitly strip libjulia*
-	strip debian/tmp/usr/lib/$$(dpkg-architecture -qDEB_HOST_MULTIARCH)/libjulia*.so
-
-override_dh_auto_clean:
-	# if we already have a version_git.jl, back that up, same with doc/_build
-	-cp base/version_git.jl base/version_git.jl.backup
-	-mv doc/_build doc/_build.backup
-	make $(COMMON_FLAGS) cleanall
-	# Don't distcleanall because we want to keep tarballs and such that we've saved
-	make -C deps $(COMMON_FLAGS) cleanall
-	rm -f deps/libuv/config.log
-	rm -rf usr
-	# Clean out .gitignore files
-	find . -name .gitignore | xargs -r rm
-	# Now the previous files back
-	-cp base/version_git.jl.backup base/version_git.jl
-	-mv doc/_build.backup doc/_build
-
-override_dh_auto_install-arch:
-	make $(COMMON_FLAGS) install
-
-override_dh_auto_install-indep:
-
-override_dh_auto_test-indep:
-
-override_dh_auto_build-indep:
+	strip usr/lib/libjulia*.so
 
 override_dh_compress:
 	dh_compress -X.jl
 
 override_dh_shlibdeps:
-	dh_shlibdeps -Xlibpcre2-posix.so
+	dh_shlibdeps -lusr/lib/julia
+	
 
+get-orig-source:
+	wget -c https://julialang.s3.amazonaws.com/bin/linux/x86/0.5/julia-0.5.0-linux-i686.tar.gz
+	wget -c https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz
+	wget -c https://julialang.s3.amazonaws.com/bin/linux/arm/0.5/julia-0.5.0-linux-arm.tar.gz
+	wget -c https://julialang.s3.amazonaws.com/bin/linux/ppc64le/0.5/julia-0.5.0-linux-ppc64le.tar.gz

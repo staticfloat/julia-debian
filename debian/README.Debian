@@ -1,13 +1,15 @@
 Julia for Debian
 ----------------
 
-Simply type `julia' in a shell to launch an interactive Julia session.
+Simply type `julia' in a shell to launch an interactive Julia session. This
+package is simply a repackaging of the generic linux binaries available online
+at http://julialang.org.
 
-Full documentation and examples are available in the julia-doc package.
+Documentation and examples are available in the /usr/share/julia directory.
 
 An Emacs mode for editing Julia source files and managing interactive sessions
 is available in the ess package.
 
 A new web interface integrated with the ipython notebook  is available via
 the IJulia package. See https://github.com/JuliaLang/IJulia.jl for details
- -- Sébastien Villemot <sebastien@debian.org>, Thu,  7 Mar 2013 11:47:59 +0100
+ -- Elliot Saba <staticfloat@gmail.com>

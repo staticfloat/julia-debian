@@ -1,3 +1,9 @@
+julia (0.5.0-trusty2) trusty; urgency=medium
+
+  * Switch over to just repackaging official binary releases
+
+ -- Elliot Saba <staticfloat@gmail.com>  Wed, 04 Jan 2017 00:42:19 -0800
+
 julia (0.5.0-trusty1) trusty; urgency=medium
 
   * Release of Julia v0.5.0
