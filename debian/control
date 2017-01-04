@@ -6,13 +6,9 @@ Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), dh-exec, tar
 Standards-Version: 3.9.4
 Section: science
 Homepage: http://julialang.org
-Vcs-Git: git://git.debian.org/git/pkg-julia/julia.git
-Vcs-Browser: http://git.debian.org/?p=pkg-julia/julia.git
 
 Package: julia
 Architecture: any
-# NB: several shared libs have to be hardcoded because they are dlopen'd from
-# Julia scripts, and therefore dpkg-shlibdeps cannot detect them
 Depends: ${shlibs:Depends}, ${misc:Depends}, zlib1g, libssl1.0.0 | libssl1.0.2
 Suggests: ess (>= 12.09-1~)
 Description: high-performance programming language for technical computing
